@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/* 余白やサイズ計算の初期化 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* リストの点を消す */
+ul {
+  list-style: none;
+}
+
+/* 演奏中の音の表示 */
+.playing_note {
+  width: 100px;
+  height: 80px;
+  margin: 30vh auto 5vh;
+  background-color: rgb(255, 240, 220);
+  border-radius: 10px;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 鍵盤 */
+.keyboard {
+  margin: 0 auto;
+  padding:0 10px;
+  display: flex;
+  max-width: 800px;
+  height: 50px;
+  gap: 3px;
+}
+
+.key {
+  width: 100%;
+  background-color: rgb(205, 255, 238);
+  border-radius: 5px;
+
+  /* 文字を上下左右の中央に配置 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
