@@ -14,11 +14,38 @@ ul {
   list-style: none;
 }
 
+header {
+  display: flex;
+  justify-content: right;
+}
+
+/* 自動演奏ボタン */
+.auto_play_button {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+
+  cursor: pointer;
+}
+
+.auto_play_button:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.auto_play_button:active {
+  background-color: rgb(190, 190, 190);
+}
+
 /* 演奏中の音の表示 */
 .display_note {
-  width: 100px;
+  min-width: 100px;
+  max-width: 170px;
+  width: 20%;
   height: 80px;
-  margin: 30vh auto 5vh;
+  margin: 25vh auto 5vh;
   background-color: rgb(255, 240, 220);
   border-radius: 10px;
 
@@ -32,7 +59,7 @@ ul {
 /* 鍵盤 */
 .keyboard {
   margin: 0 auto;
-  padding:0 10px;
+  padding: 0 3%;
   display: flex;
   max-width: 800px;
   height: 50px;
@@ -45,11 +72,20 @@ ul {
   width: 100%;
   background-color: rgb(205, 255, 238);
   border-radius: 5px;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   user-select: none;
   cursor: pointer;
+}
+
+.key:hover {
+  background-color: rgb(180, 246, 229);
+}
+
+.key:active {
+  background-color: rgb(125, 205, 188);
+  transform: translateY(2px);
 }
