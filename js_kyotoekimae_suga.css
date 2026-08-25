@@ -15,17 +15,18 @@ ul {
 }
 
 /* 演奏中の音の表示 */
-.playing_note {
+.display_note {
   width: 100px;
   height: 80px;
   margin: 30vh auto 5vh;
   background-color: rgb(255, 240, 220);
   border-radius: 10px;
 
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  user-select: none;
 }
 
 /* 鍵盤 */
@@ -38,13 +39,17 @@ ul {
   gap: 3px;
 }
 
+
+/* 鍵盤の各キー*/
 .key {
   width: 100%;
   background-color: rgb(205, 255, 238);
   border-radius: 5px;
-
-  /* 文字を上下左右の中央に配置 */
+  
   display: flex;
   justify-content: center;
   align-items: center;
+
+  user-select: none;
+  cursor: pointer;
 }
