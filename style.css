@@ -16,11 +16,24 @@ ul {
 
 header {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
+	align-items: stretch; /* 子要素の高さをヘッダー全体に伸ばす */
+}
+
+.auto_play_status{
+	display:flex;
+	font-size: 16px;
+  font-weight: bold;
+	padding: 0 20px;
+	align-items: center;  /* テキストを上下中央揃え */
+	background-color: rgb(212, 235, 255);
+	border-bottom-right-radius: 15px;
 }
 
 /* 自動演奏ボタン */
 .auto_play_button {
+	margin-top: 10px;
+	margin-right: 20px;
   font-size: 16px;
   font-weight: bold;
   width: 100px;

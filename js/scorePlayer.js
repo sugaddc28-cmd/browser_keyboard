@@ -1,0 +1,84 @@
+"use strict";
+
+// 自動再生機能
+
+class ScorePlayer {
+	// DOMの取得
+	static #autoPlayButton = Elements.autoPlayButton;
+
+	// setTimeOut用Timer
+	static #autoPlayTimer = null;
+
+	// 再生フラグ(UI管理を兼ねる)
+	static #_isPlaying = false;
+	static get isPlaying() {
+		return this.#_isPlaying;
+	}
+	static set #isPlaying(value) {
+		this.#_isPlaying = value;
+
+		// 再生ボタンの書き換え
+		if (this.isPlaying) {
+			this.#autoPlayButton.textContent = "演奏中止";
+		}
+		else {
+			this.#autoPlayButton.textContent = "自動演奏";
+		}
+	}
+
+	// クラスロード時
+	static {
+		this.#autoPlayButton.addEventListener('click', () => this.#handleButtonClick());
+	}
+
+	// 再生ボタン押下時
+	static #handleButtonClick() {
+		if (this.isPlaying) {
+			this.stopScore();
+		} else {
+			this.#playScore(Score.getRandomScore());
+		}
+	}
+
+	// 停止
+	static stopScore() {
+		// フラグ管理
+		this.#isPlaying = false;
+
+		// 自動再生の停止
+		if (this.#autoPlayTimer) {
+			clearTimeout(this.#autoPlayTimer);
+			this.#autoPlayTimer = null;
+		}
+
+		// 演奏中の単音を止める
+		NotePlayer.stopPlayNote();
+	}
+
+	// 再生
+	static #playScore(score) {
+		// 再生フラグを立てる
+		this.#isPlaying = true;
+
+		// 再生開始
+		this.#playSequence(score.data);
+	}
+
+	// 自動演奏(timerを用い再帰的にplayeSequenceを呼び出す)
+	static #playSequence(score, index = 0) {
+		// 楽譜の最後まで再生したら終了
+		if (index >= score.length) return;
+		const currentItem = score[index];
+
+		// 音を表示
+		if (currentItem.note) {
+			NotePlayer.playNote(currentItem.note, currentItem.duration);
+		}
+
+		// 指定された時間待ってから次の音を呼ぶ
+		this.#autoPlayTimer =
+			setTimeout(() =>
+				this.#playSequence(score, index + 1),
+				currentItem.duration);
+	}
+}
