@@ -1,6 +1,7 @@
 "use strict";
 
 // 自動再生機能
+// プロパティでDOMの更新を管理させている
 
 class ScorePlayer {
 	// DOMの取得
