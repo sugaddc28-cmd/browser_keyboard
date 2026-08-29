@@ -20,6 +20,7 @@ header {
 	align-items: stretch; /* 子要素の高さをヘッダー全体に伸ばす */
 }
 
+/* 曲名表示 */
 .auto_play_status{
 	display:flex;
 	font-size: 16px;
@@ -28,6 +29,18 @@ header {
 	align-items: center;  /* テキストを上下中央揃え */
 	background-color: rgb(212, 235, 255);
 	border-bottom-right-radius: 15px;
+
+	/* 初期状態（画面外へ格納） */
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.5s ease, 
+							opacity 0.5s ease;
+}
+
+/* 再生時の表示状態 */
+.auto_play_status.is-active {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 /* 自動演奏ボタン */

@@ -5,9 +5,10 @@
 class ScorePlayer {
 	// DOMの取得
 	static #autoPlayButton = Elements.autoPlayButton;
+	static #songTitle = Elements.songTitle;
 
 	// setTimeOut用Timer
-	static #autoPlayTimer = null;
+	static #autoPlayTimerId = null;
 
 	// 再生フラグ(UI管理を兼ねる)
 	static #_isPlaying = false;
@@ -17,13 +18,20 @@ class ScorePlayer {
 	static set #isPlaying(value) {
 		this.#_isPlaying = value;
 
-		// 再生ボタンの書き換え
+		// 再生ボタンの書き換え＋曲名UIのアクティブ化
 		if (this.isPlaying) {
 			this.#autoPlayButton.textContent = "演奏中止";
+			this.#songTitle.classList.add("is-active");
 		}
 		else {
 			this.#autoPlayButton.textContent = "自動演奏";
+			this.#songTitle.classList.remove("is-active");
 		}
+	}
+
+	// titleプロパティ（実体無し)
+	static set #title(value){
+		this.#songTitle.textContent = value; 
 	}
 
 	// クラスロード時
@@ -36,7 +44,7 @@ class ScorePlayer {
 		if (this.isPlaying) {
 			this.stopScore();
 		} else {
-			this.#playScore(Score.getRandomScore());
+			this.#playScore();
 		}
 	}
 
@@ -46,9 +54,9 @@ class ScorePlayer {
 		this.#isPlaying = false;
 
 		// 自動再生の停止
-		if (this.#autoPlayTimer) {
-			clearTimeout(this.#autoPlayTimer);
-			this.#autoPlayTimer = null;
+		if (this.#autoPlayTimerId) {
+			clearTimeout(this.#autoPlayTimerId);
+			this.#autoPlayTimerId = null;
 		}
 
 		// 演奏中の単音を止める
@@ -56,9 +64,13 @@ class ScorePlayer {
 	}
 
 	// 再生
-	static #playScore(score) {
-		// 再生フラグを立てる
+	static #playScore() {
+		// ランダムに楽譜を生成
+		const score = Score.getRandomScore()
+
+		// 再生フラグを立て、タイトルを更新
 		this.#isPlaying = true;
+		this.#title=score.title;
 
 		// 再生開始
 		this.#playSequence(score.data);
@@ -67,7 +79,10 @@ class ScorePlayer {
 	// 自動演奏(timerを用い再帰的にplayeSequenceを呼び出す)
 	static #playSequence(score, index = 0) {
 		// 楽譜の最後まで再生したら終了
-		if (index >= score.length) return;
+		if (index >= score.length) {
+			this.#isPlaying = false;
+			return;
+		}
 		const currentItem = score[index];
 
 		// 音を表示
@@ -76,7 +91,7 @@ class ScorePlayer {
 		}
 
 		// 指定された時間待ってから次の音を呼ぶ
-		this.#autoPlayTimer =
+		this.#autoPlayTimerId =
 			setTimeout(() =>
 				this.#playSequence(score, index + 1),
 				currentItem.duration);

@@ -6,7 +6,8 @@ class NotePlayer {
 	// DOMの取得
 	static #displayNote = Elements.displayNote;
 
-	static #timerId = null;
+	// setTimeOut用Timer
+	static #notePlayTimerId = null;
 
 	static {
 		// 既存の要素をクリア
@@ -15,21 +16,21 @@ class NotePlayer {
 	
 	static stopPlayNote(){
 		// すでに動いてるタイマーがあれば削除
-		if (this.#timerId) clearTimeout(this.#timerId);
-		this.#timerId=null
+		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
+		this.#notePlayTimerId=null
 		this.#displayNote.textContent = '';
 	}
 
 	// 音を指定時間表示する
 	static playNote(noteString, time = 1000) {
 		// すでに動いてるタイマーがあれば削除
-		if (this.#timerId) clearTimeout(this.#timerId);
+		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
 
 		// 音名を表示
 		this.#displayNote.textContent = noteString;
 
 		// 指定時間後に表示を消すタイマーをセット
-		this.#timerId = setTimeout(() => {
+		this.#notePlayTimerId = setTimeout(() => {
 			this.#displayNote.textContent = '';
 		}, time);
 	}
