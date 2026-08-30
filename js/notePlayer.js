@@ -13,11 +13,11 @@ class NotePlayer {
 		// 既存の要素をクリア
 		this.#displayNote.innerHTML = '';
 	}
-	
-	static stopPlayNote(){
+
+	static stopPlayNote() {
 		// すでに動いてるタイマーがあれば削除
 		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
-		this.#notePlayTimerId=null
+		this.#notePlayTimerId = null
 		this.#displayNote.textContent = '';
 	}
 
@@ -25,6 +25,9 @@ class NotePlayer {
 	static playNote(noteString, time = 1000) {
 		// すでに動いてるタイマーがあれば削除
 		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
+
+		// 音を再生
+		Synth.playNote(noteString, time);
 
 		// 音名を表示
 		this.#displayNote.textContent = noteString;
