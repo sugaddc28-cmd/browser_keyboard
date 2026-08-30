@@ -1,7 +1,7 @@
 "use strict";
 
 
-class MakeKeyboard {
+class KeyboardMaker {
 	static #keyboard = Elements.keyboard;
 
 	static #notes = Object.freeze(['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ']);
