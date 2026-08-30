@@ -26,7 +26,10 @@ class MakeKeyboard {
 			this.#keyboard.appendChild(key);
 
 			// クリック時音を鳴らすイベントを付加
-			key.addEventListener('pointerdown', () => NotePlayer.playNote(note));
+			key.addEventListener('pointerdown', () => {
+				if(ScorePlayer.isPlaying)return;
+				NotePlayer.playNote(note)
+			});
 		});
 	}
 }
