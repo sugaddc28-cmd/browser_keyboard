@@ -1,6 +1,6 @@
 "use strict";
 
-// 楽譜をscore/.scoreから作成する
+// 文字列から楽譜データを生成する
 // 不正値の検証はしていない
 
 // 出力される (getRandomScore() の戻り値) の例
@@ -50,11 +50,11 @@ class Score {
 		}
 		];
 
-		this.#parsedScores = rawScores.map(item => ({ title: item.title, data: this.#makeScore(item.data) }));
+		this.#parsedScores = rawScores.map(item => ({ title: item.title, data: this.#parseScore(item.data) }));
 	}
 
 	// 文字列から楽譜を作成
-	static #makeScore(scoreStr) {
+	static #parseScore(scoreStr) {
 		return scoreStr.split(')')
 			.filter(item => item.trim() !== '')/* 要素から改行スペースを取り除いた後、空文字のみの要素だった場合消す */
 			.map(item => {

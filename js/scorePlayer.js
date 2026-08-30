@@ -77,14 +77,14 @@ class ScorePlayer {
 		this.#playSequence(score.data);
 	}
 
-	// 自動演奏(timerを用い再帰的にplayeSequenceを呼び出す)
-	static #playSequence(score, index = 0) {
+	// 自動演奏(timerを用い再帰的にplaySequenceを呼び出す)
+	static #playSequence(scoreData, index = 0) {
 		// 楽譜の最後まで再生したら終了
-		if (index >= score.length) {
+		if (index >= scoreData.length) {
 			this.#isPlaying = false;
 			return;
 		}
-		const currentItem = score[index];
+		const currentItem = scoreData[index];
 
 		// 音を表示
 		if (currentItem.note) {
@@ -94,7 +94,7 @@ class ScorePlayer {
 		// 指定された時間待ってから次の音を呼ぶ
 		this.#autoPlayTimerId =
 			setTimeout(() =>
-				this.#playSequence(score, index + 1),
+				this.#playSequence(scoreData, index + 1),
 				currentItem.duration);
 	}
 }
