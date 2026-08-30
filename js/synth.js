@@ -33,9 +33,9 @@ class Synth {
 		const durationSec = durationMs / 1000;
 
 		// 音量エンベロープ（急に鳴って急に切れるとプツッと音が出るので緩和）
-		gainNode.gain.setValueAtTime(0, now); // 最初無音
+		gainNode.gain.setValueAtTime(0.2, now); // 最初無音
 		gainNode.gain.linearRampToValueAtTime(0.2, now + 0.01); // アタック
-		gainNode.gain.linearRampToValueAtTime(0.15, now + durationSec -0.01); // リリース
+		gainNode.gain.linearRampToValueAtTime(0.15, now + durationSec - 0.01); 
 		gainNode.gain.linearRampToValueAtTime(0, now + durationSec); // リリース
 
 		ascillator.start(now);

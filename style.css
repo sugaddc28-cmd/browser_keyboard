@@ -17,18 +17,20 @@ ul {
 header {
   display: flex;
   justify-content: space-between;
-	align-items: stretch; /* 子要素の高さをヘッダー全体に伸ばす */
+	align-items: stretch;
 }
 
 /* 曲名表示 */
 .auto_play_status{
+	width: 300px;
 	display:flex;
 	font-size: 16px;
   font-weight: bold;
 	padding: 0 20px;
-	align-items: center;  /* テキストを上下中央揃え */
+	align-items: center; 
 	background-color: rgb(212, 235, 255);
 	border-bottom-right-radius: 15px;
+
 
 	/* 初期状態（画面外へ格納） */
   transform: translateX(-100%);
@@ -36,6 +38,20 @@ header {
   transition: transform 0.5s ease, 
 							opacity 0.5s ease;
 }
+
+/* 音量調節バー */
+.volume_control {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 20px;
+	font-size: 14px;
+}
+
+.volume_slider {
+	cursor: pointer;
+}
+
 
 /* 再生時の表示状態 */
 .auto_play_status.is-active {
@@ -47,6 +63,7 @@ header {
 .auto_play_button {
 	margin-top: 10px;
 	margin-right: 20px;
+	margin-left:200px; /*TEMP:音量バーを中央にするために暫定的に左にmargin*/
   font-size: 16px;
   font-weight: bold;
   width: 100px;

@@ -27,7 +27,8 @@ class MakeKeyboard {
 
 			// クリック時音を鳴らすイベントを付加
 			key.addEventListener('pointerdown', () => {
-				if(ScorePlayer.isPlaying)return;
+				// TEMP: 取り敢えず自動演奏中鳴らないようにしてる
+				if(ScorePlayer.isPlaying)return; 
 				NotePlayer.playNote(note)
 			});
 		});
