@@ -32,7 +32,7 @@ class ScorePlayer {
 
 	// titleプロパティ（実体無し)
 	static set #title(value){
-		this.#songTitle.textContent = value; 
+		this.#songTitle.textContent = "自動演奏中です："+value; 
 	}
 
 	// クラスロード時
