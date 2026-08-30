@@ -21,7 +21,7 @@ header {
 }
 
 /* 曲名表示 */
-.auto_play_status{
+.song_title{
 	width: 300px;
 	display:flex;
 	font-size: 16px;
@@ -54,7 +54,7 @@ header {
 
 
 /* 再生時の表示状態 */
-.auto_play_status.is-active {
+.song_title.is-active {
   transform: translateX(0);
   opacity: 1;
 }

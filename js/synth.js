@@ -18,15 +18,15 @@ class Synth {
 		const frequency = this.#noteFrequencies[noteString];
 		if (!frequency) return; // 休符など
 
-		const ascillator = this.#audioContext.createOscillator();
+		const oscillator = this.#audioContext.createOscillator();
 		const gainNode = this.#audioContext.createGain();
 
 		// 周波数と波形をセット
-		ascillator.type = "square"; // 波形： sine, square, sawtooth, triangle
-		ascillator.frequency.value = frequency;
+		oscillator.type = "square"; // 波形： sine, square, sawtooth, triangle
+		oscillator.frequency.value = frequency;
 
 		// 発振器→音量調整→スピーカーの順で接続
-		ascillator.connect(gainNode);
+		oscillator.connect(gainNode);
 		gainNode.connect(this.#audioContext.destination);
 
 		const now = this.#audioContext.currentTime;
@@ -38,8 +38,8 @@ class Synth {
 		gainNode.gain.linearRampToValueAtTime(0.15, now + durationSec - 0.01); 
 		gainNode.gain.linearRampToValueAtTime(0, now + durationSec); // リリース
 
-		ascillator.start(now);
-		ascillator.stop(now + durationSec);
+		oscillator.start(now);
+		oscillator.stop(now + durationSec);
 	}
 
 }

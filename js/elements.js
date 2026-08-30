@@ -5,7 +5,7 @@
 
 const Elements = Object.freeze({
 	autoPlayButton: document.querySelector(".auto_play_button"),
-	songTitle: document.querySelector(".auto_play_status"),
+	songTitle: document.querySelector(".song_title"),
 	keyboard: document.querySelector(".keyboard"),
 	displayNote: document.querySelector(".display_note h1"),
 });
