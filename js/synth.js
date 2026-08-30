@@ -14,8 +14,8 @@ class Synth {
 		'シ': 493.88, // B4
 	});
 
-	static playNote(noteString, durationMs = 1000) {
-		const frequency = this.#noteFrequencies[noteString];
+	static playNote(noteStr, durationMs = 1000) {
+		const frequency = this.#noteFrequencies[noteStr];
 		if (!frequency) return; // 休符など
 
 		const oscillator = this.#audioContext.createOscillator();

@@ -22,19 +22,19 @@ class NotePlayer {
 	}
 
 	// 音を指定時間表示する
-	static playNote(noteString, time = 1000) {
+	static playNote(noteStr, duration = 1000) {
 		// すでに動いてるタイマーがあれば削除
 		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
 
 		// 音を再生
-		Synth.playNote(noteString, time);
+		Synth.playNote(noteStr, duration);
 
 		// 音名を表示
-		this.#displayNote.textContent = noteString;
+		this.#displayNote.textContent = noteStr;
 
 		// 指定時間後に表示を消すタイマーをセット
 		this.#notePlayTimerId = setTimeout(() => {
 			this.#displayNote.textContent = '';
-		}, time);
+		}, duration);
 	}
 }
