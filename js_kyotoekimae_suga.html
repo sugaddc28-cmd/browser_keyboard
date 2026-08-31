@@ -7,7 +7,8 @@
 	<title>簡易ピアノアプリ</title>
 	<link rel="stylesheet" href="style.css" />
 	<script src="js/elements.js" defer></script>
-	<script src="js/synth.js"></script>
+	<script src="js/synth.js" defer></script>
+	<script src="js/volumeController.js" defer></script>
 	<script src="js/notePlayer.js" defer></script>
 	<script src="js/score.js" defer></script>
 	<script src="js/scorePlayer.js" defer></script>
@@ -20,7 +21,7 @@
 		<div class="song_title">タイトル</div>
 		<div class="volume_control">
 			<label for="volume">音量</label>
-			<input type="range" id="volume" class="volume_slider" min="0" max="100" value="50" />
+			<input type="range" id="volume" class="volume_slider" min="0" max="100" value="0" />
 		</div>
 		<button class="auto_play_button">自動演奏</button>
 	</header>

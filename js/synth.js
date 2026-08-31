@@ -2,6 +2,7 @@
 
 class Synth {
 	static #audioContext = new AudioContext();
+	static #masterVolume;
 
 	// ドレミファソラシ → 周波数(Hz)の対応表
 	static #noteFrequencies = Object.freeze({
@@ -14,6 +15,10 @@ class Synth {
 		'シ': 493.88, // B4
 	});
 
+	static setVolume(value) {
+		this.#masterVolume = value;
+	}
+
 	static playNote(noteStr, durationMs = 1000) {
 		const frequency = this.#noteFrequencies[noteStr];
 		if (!frequency) return; // 休符など
@@ -25,7 +30,7 @@ class Synth {
 		oscillator.type = "square"; // 波形： sine, square, sawtooth, triangle
 		oscillator.frequency.value = frequency;
 
-		// 発振器→音量調整→スピーカーの順で接続
+		// 発振器→個別音量調整→スピーカーの順で接続
 		oscillator.connect(gainNode);
 		gainNode.connect(this.#audioContext.destination);
 
@@ -35,8 +40,8 @@ class Synth {
 
 		// 音量エンベロープ（急に鳴って急に切れるとプツッと音が出るので緩和）
 		gainNode.gain.setValueAtTime(0.0, now); // 最初無音
-		gainNode.gain.linearRampToValueAtTime(0.2, now + 0.01); // アタック
-		gainNode.gain.linearRampToValueAtTime(0.15, now + durationSec - 0.01);
+		gainNode.gain.linearRampToValueAtTime(0.2*this.#masterVolume, now + 0.01); // アタック
+		gainNode.gain.linearRampToValueAtTime(0.15*this.#masterVolume, now + durationSec - 0.01);
 		gainNode.gain.linearRampToValueAtTime(0, now + durationSec); // リリース
 
 		oscillator.start(now);

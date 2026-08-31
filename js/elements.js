@@ -8,4 +8,5 @@ const Elements = Object.freeze({
 	songTitle: document.querySelector(".song_title"),
 	keyboard: document.querySelector(".keyboard"),
 	displayNote: document.querySelector(".display_note h1"),
+	volumeSlider: document.getElementById("volume"),
 });
