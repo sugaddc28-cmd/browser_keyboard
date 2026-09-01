@@ -1,7 +1,8 @@
-"use strict";
+import { Elements } from './elements.js';
+import { ScorePlayer } from './scorePlayer.js';
+import { NotePlayer } from './notePlayer.js';
 
-
-class KeyboardMaker {
+export class KeyboardMaker {
 	static #keyboard = Elements.keyboard;
 
 	static #notes = Object.freeze(['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ']);

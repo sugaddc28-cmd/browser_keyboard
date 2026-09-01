@@ -1,6 +1,6 @@
 'use strict'
 
-class Synth {
+export class Synth {
 	static #audioContext = new AudioContext();
 	static #masterVolume;
 

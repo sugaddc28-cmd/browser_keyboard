@@ -1,8 +1,9 @@
-"use strict";
+import { Elements } from './elements.js';
+import { Synth } from './synth.js';
 
 // 単音再生
 
-class NotePlayer {
+export class NotePlayer {
 	// DOMの取得
 	static #displayNote = Elements.displayNote;
 

@@ -14,7 +14,7 @@
 // 	]
 // };
 
-class Score {
+export class Score {
 	// 解析済み楽譜データ
 	static #parsedScores = [];
 

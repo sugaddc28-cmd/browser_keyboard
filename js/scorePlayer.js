@@ -1,9 +1,11 @@
-"use strict";
+import { Elements } from './elements.js';
+import { Score } from './score.js';
+import { NotePlayer } from './notePlayer.js';
 
 // 自動再生機能
 // プロパティでDOMの更新を管理させている
 
-class ScorePlayer {
+export class ScorePlayer {
 	// DOMの取得
 	static #autoPlayButton = Elements.autoPlayButton;
 	static #songTitle = Elements.songTitle;

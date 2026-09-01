@@ -1,6 +1,8 @@
 'use strict'
+import { Elements } from './elements.js';
+import { Synth } from './synth.js';
 
-class VoumeController{
+export class VolumeController{
   static #volumeSlider = Elements.volumeSlider;
 
   static{
