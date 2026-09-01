@@ -5,18 +5,23 @@ export class Synth {
 	static #masterVolume;
 
 	// ドレミファソラシ → 周波数(Hz)の対応表
-	static #noteFrequencies = Object.freeze({
+	static #noteOffsets = Object.freeze({
 		'ド': 261.63, // C4
 		'レ': 293.66, // D4
 		'ミ': 329.63, // E4
-		'ファ': 349.23, // F4
-		'ソ': 392.00, // G4
-		'ラ': 440.00, // A4
-		'シ': 493.88, // B4
+		'ファ': -2, // F4
+		'ソ': -1, // G4
+		'ラ': 0, // A4
+		'シ': 1, // B4
 	});
 
 	static setVolume(value) {
 		this.#masterVolume = value;
+	}
+
+	// 周波数を計算で求める
+	static #getFrequency(noteStr){
+		const offset = this.#noteOffsets[noteStr];
 	}
 
 	static playNote(noteStr, durationMs = 1000) {
