@@ -1,5 +1,5 @@
-import { Elements } from './elements.js';
-import { Synth } from './synth.js';
+import { Elements } from '../elements.js';
+import { Synth } from '../audio/synth.js';
 
 // 単音再生
 
@@ -23,19 +23,21 @@ export class NotePlayer {
 	}
 
 	// 音を指定時間表示する
-	static playNote(noteStr, durationMs = 1000) {
+	static playNote(note, durationMs = 1000) {
 		// すでに動いてるタイマーがあれば削除
 		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
 
 		// 音を再生
-		Synth.playNote(noteStr, durationMs);
+		Synth.playNote(note, durationMs);
 
 		// 音名を表示
-		this.#displayNote.textContent = noteStr;
+		this.#displayNote.textContent = note.name;
 
 		// 指定時間後に表示を消すタイマーをセット
 		this.#notePlayTimerId = setTimeout(() => {
 			this.#displayNote.textContent = '';
 		}, durationMs);
+
+		
 	}
 }

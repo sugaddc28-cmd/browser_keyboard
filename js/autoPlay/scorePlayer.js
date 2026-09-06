@@ -1,6 +1,6 @@
-import { Elements } from './elements.js';
+import { Elements } from '../elements.js';
 import { Score } from './score.js';
-import { NotePlayer } from './notePlayer.js';
+import { NotePlayer } from '../playback/notePlayer.js';
 
 // 自動再生機能
 // プロパティでDOMの更新を管理させている
@@ -33,8 +33,8 @@ export class ScorePlayer {
 	}
 
 	// titleプロパティ（実体無し)
-	static set #title(value){
-		this.#songTitle.textContent = "自動演奏中です："+value; 
+	static set #title(value) {
+		this.#songTitle.textContent = "自動演奏中です：" + value;
 	}
 
 	// クラスロード時
@@ -73,7 +73,7 @@ export class ScorePlayer {
 
 		// 再生フラグを立て、タイトルを更新
 		this.#isPlaying = true;
-		this.#title=score.title;
+		this.#title = score.title;
 
 		// 再生開始
 		this.#playSequence(score.data);

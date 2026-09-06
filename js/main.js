@@ -1,2 +1,2 @@
-import './volumeController.js';
-import './keyboardMaker.js';
+import './ui/volumeController.js';
+import './keyboard/keyboardMaker.js';
