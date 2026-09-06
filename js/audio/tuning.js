@@ -7,7 +7,7 @@ export class Tuning{
 	static #A4 = 440;
 
 	// 絶対半音を渡すと周波数(Hz)を返す
-	static getFrequency(note){
-		return this.#A4 * (2 ** (note.semitone / 12));
+	static getFrequency(semitone){
+		return this.#A4 * (2 ** (semitone / 12));
 	}
 }

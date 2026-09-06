@@ -8,8 +8,6 @@ export class NotePlayer {
 	// setTimeOut用Timer
 	static #notePlayTimerId = null;
 
-
-
 	static stopPlayNote() {
 		// すでに動いてるタイマーがあれば削除
 		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
@@ -20,16 +18,17 @@ export class NotePlayer {
 	// 音を指定時間表示する
 	static playNote(note, durationMs = 1000) {
 		// すでに動いてるタイマーがあれば削除
-		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
+		// if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
 
 		// 音を再生
-		Synth.playNote(note, durationMs);
+		Synth.startNote(note.semitone);
 
 		// 音名を表示
 		NoteDisplay.set(note);
 
 		// 指定時間後に表示を消すタイマーをセット
 		this.#notePlayTimerId = setTimeout(() => {
+			Synth.stopNote(note.semitone);
 			NoteDisplay.clear();
 		}, durationMs);
 	}

@@ -1,44 +1,42 @@
-import { Tuning } from "../scale/tuning.js";
+import { Tuning } from "./tuning.js";
+import { Voice } from "./voice.js";
 
 export class Synth {
-	static #audioContext = new AudioContext();
-	static #masterVolume;
-
+	static #masterVolume = 0;
+	static #activeVoices = new Map(); // semition
 
 
 	static setVolume(value) {
 		this.#masterVolume = value;
 	}
 
+	static startNote(semitone) {
 
+		// 既存のVoiceが残っている場合は再利用
+		if (this.#activeVoices.has(semitone)) {
+			const voice = this.#activeVoices.get(semitone);
+			voice.start(this.#masterVolume);
+			return;
+		}
 
-	static playNote(note, durationMs = 1000) {
-		const frequency = Tuning.getFrequency(note);
-		if (!frequency) return; // 休符など
+		const frequency = Tuning.getFrequency(semitone);
 
-		const oscillator = this.#audioContext.createOscillator();
-		const gainNode = this.#audioContext.createGain();
+		
+		const voice = new Voice(
+			frequency,
+			"square",
+			// オシレーター停止時に Map から削除する
+			() => { this.#activeVoices.delete(semitone); }
+		);
 
-		// 周波数と波形をセット
-		oscillator.type = "square"; // 波形： sine, square, sawtooth, triangle
-		oscillator.frequency.value = frequency;
-
-		// 発振器→個別音量調整→スピーカーの順で接続
-		oscillator.connect(gainNode);
-		gainNode.connect(this.#audioContext.destination);
-
-		// エンベロープ用の時間を取得
-		const now = this.#audioContext.currentTime;
-		const durationSec = durationMs / 1000;
-
-		// 音量エンベロープ（急に鳴って急に切れるとプツッと音が出るので緩和）
-		gainNode.gain.setValueAtTime(0.0, now); // 最初無音
-		gainNode.gain.linearRampToValueAtTime(0.2*this.#masterVolume, now + 0.01); // アタック
-		gainNode.gain.linearRampToValueAtTime(0.15*this.#masterVolume, now + durationSec - 0.01);
-		gainNode.gain.linearRampToValueAtTime(0, now + durationSec); // リリース
-
-		oscillator.start(now);
-		oscillator.stop(now + durationSec);
+		voice.start(this.#masterVolume);
+		this.#activeVoices.set(semitone,voice);
 	}
 
+	static stopNote(semitone){
+		const voice = this.#activeVoices.get(semitone);
+		if(!voice)return;
+
+		voice.stop();
+	}
 }
