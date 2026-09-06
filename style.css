@@ -20,25 +20,6 @@ header {
 	align-items: stretch;
 }
 
-/* 曲名表示 */
-.song_title{
-	width: 300px;
-	display:flex;
-	font-size: 16px;
-  font-weight: bold;
-	padding: 0 20px;
-	align-items: center; 
-	background-color: rgb(212, 235, 255);
-	border-bottom-right-radius: 15px;
-
-
-	/* 初期状態（画面外へ格納） */
-  transform: translateX(-100%);
-  opacity: 0;
-  transition: transform 0.5s ease, 
-							opacity 0.5s ease;
-}
-
 /* 音量調節バー */
 .volume_control {
 	display: flex;
@@ -52,35 +33,6 @@ header {
 	cursor: pointer;
 }
 
-
-/* 再生時の表示状態 */
-.song_title.is-active {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-/* 自動演奏ボタン */
-.auto_play_button {
-	margin-top: 10px;
-	margin-right: 20px;
-	margin-left:200px; /*TEMP:音量バーを中央にするために暫定的に左にmargin*/
-  font-size: 16px;
-  font-weight: bold;
-  width: 100px;
-  height: 40px;
-  border-radius: 5px;
-  border: none;
-
-  cursor: pointer;
-}
-
-.auto_play_button:hover {
-  background-color: rgb(220, 220, 220);
-}
-
-.auto_play_button:active {
-  background-color: rgb(190, 190, 190);
-}
 
 /* 演奏中の音の表示 */
 .display_note {
