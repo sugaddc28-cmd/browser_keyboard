@@ -10,12 +10,11 @@ export class Synth {
 		this.#masterVolume = value;
 	}
 
-	static startNote(semitone) {
-
+	static startNote(semitone,durationMs=null) {
 		// 既存のVoiceが残っている場合は再利用
 		if (this.#activeVoices.has(semitone)) {
 			const voice = this.#activeVoices.get(semitone);
-			voice.start(this.#masterVolume);
+			voice.start(this.#masterVolume,durationMs);
 			return;
 		}
 
@@ -29,7 +28,7 @@ export class Synth {
 			() => { this.#activeVoices.delete(semitone); }
 		);
 
-		voice.start(this.#masterVolume);
+		voice.start(this.#masterVolume,durationMs);
 		this.#activeVoices.set(semitone,voice);
 	}
 

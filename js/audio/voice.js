@@ -25,18 +25,21 @@ export class Voice {
 	}
 
 	// アタック
-	start(volume) {
+	start(volume, durationMs = null) {
 		const now = audioContext.currentTime;
 
 		// 現在進行中の音量変更予約を取り消し、現在のゲイン値から滑らかに持ち上げる
 		this.#gainNode.gain.cancelScheduledValues(now);
 		this.#gainNode.gain.setValueAtTime(this.#gainNode.gain.value, now);
 		this.#gainNode.gain.linearRampToValueAtTime(0.2 * volume, now + 0.01);
-		
+
+		// 設定が無い場合鳴りっぱなし
+		if (durationMs === null) return;
+		const durationSec = durationMs / 1000;
 		// 2. ディケイ（減衰）: ピーク到達後、無音（0）に向かって指数関数的に減衰させる
 		// timeConstant（第3引数）の値を大きくすると余韻が長くなります
-		const decayTimeConstant = 0.8;
-		this.#gainNode.gain.setTargetAtTime(0, now + 0.01, decayTimeConstant);
+		this.#gainNode.gain.setTargetAtTime(0, now + 0.01, durationSec);
+		this.#oscillator.stop(now + 0.01 + durationSec);
 	}
 
 	// 停止

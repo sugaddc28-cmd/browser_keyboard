@@ -14,7 +14,9 @@ export class NoteDisplay {
 	}
 
 	// 表示を消す
-	static clear() {
-		this.#displayNote.textContent = '';
+	static clear(note) {
+		if(note.name !== this.#displayNote.textContent)return;
+
+		this.#displayNote.textContent ='';
 	}
 }

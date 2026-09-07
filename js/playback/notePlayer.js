@@ -15,21 +15,33 @@ export class NotePlayer {
 		NoteDisplay.clear();
 	}
 
-	// 音を指定時間表示する
-	static playNote(note, durationMs = 1000) {
-		// すでに動いてるタイマーがあれば削除
-		// if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
-
+	static startNote(note,durationMs = null) {
 		// 音を再生
-		Synth.startNote(note.semitone);
+		Synth.startNote(note.semitone,durationMs);
 
 		// 音名を表示
 		NoteDisplay.set(note);
+	}
+
+	static stopNote(note) {
+		// 再生を停止
+		Synth.stopNote(note.semitone);
+
+		// 音名を消す
+		NoteDisplay.clear(note);
+	}
+
+	// 音を指定時間表示する
+	static playNote(note, durationMs = 1000) {
+		// すでに動いてるタイマーがあれば削除
+		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
+
+		// 音を再生
+		this.startNote(note,durationMs);
 
 		// 指定時間後に表示を消すタイマーをセット
 		this.#notePlayTimerId = setTimeout(() => {
-			Synth.stopNote(note.semitone);
-			NoteDisplay.clear();
+			this.stopNote(note);
 		}, durationMs);
 	}
 }
