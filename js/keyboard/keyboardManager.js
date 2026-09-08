@@ -25,7 +25,7 @@ export class KeyboardManager {
 	}
 
 	// semitoneからKeyインスタンスを取得する
-	static getKey(semition){
+	static getKey(semitone){
 		return this.#keyMap.get(semitone);
 	}
 

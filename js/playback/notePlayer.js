@@ -1,5 +1,6 @@
 import { NoteDisplay } from '../ui/noteDisplay.js';
 import { Synth } from '../audio/synth.js';
+import { KeyboardManager } from '../keyboard/keyboardManager.js';
 
 // 単音再生
 
@@ -21,6 +22,10 @@ export class NotePlayer {
 
 		// 音名を表示
 		NoteDisplay.set(note);
+
+		// キーを操作
+		const key = KeyboardManager.getKey(note.semitone);
+		key.press();
 	}
 
 	static stopNote(note) {
@@ -29,6 +34,10 @@ export class NotePlayer {
 
 		// 音名を消す
 		NoteDisplay.clear(note);
+
+		// キーを操作
+		const key = KeyboardManager.getKey(note.semitone);
+		key.release();
 	}
 
 	// 音を指定時間表示する

@@ -3,7 +3,6 @@ import { NotePlayer } from "../playback/notePlayer.js";
 export class Key {
 	#note;
 	#element;
-
 	
 	constructor(note) {
 		this.#note = note;
@@ -52,13 +51,15 @@ export class Key {
 		return key;
 	}
 
-	#press() {
+
+
+	press() {
 		this.#element.classList.add('active');
-		NotePlayer.startNote(this.#note);
+		// NotePlayer.startNote(this.#note);
 	}
 
-	#release() {
+	release() {
 		this.#element.classList.remove('active');
-		NotePlayer.stopNote(this.#note);
+		// NotePlayer.stopNote(this.#note);
 	}
 }
