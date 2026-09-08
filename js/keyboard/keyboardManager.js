@@ -2,7 +2,7 @@ import { Elements } from '../elements.js';
 import { Scale } from '../scale/scale.js';
 import { Key } from './key.js';
 
-export class KeyboardMaker {
+export class KeyboardManager {
 	static #keyboard = Elements.keyboard;
 
 	static #notes = Scale.getKeyboardNotes();
