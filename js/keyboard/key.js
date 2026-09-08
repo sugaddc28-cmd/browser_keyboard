@@ -1,13 +1,11 @@
 import { NotePlayer } from "../playback/notePlayer.js";
 
 export class Key {
-	#index;
 	#note;
 	#element;
 
 	
-	constructor(index, note) {
-		this.#index = index;
+	constructor(note) {
 		this.#note = note;
 		this.#element = this.#createElement();
 	}

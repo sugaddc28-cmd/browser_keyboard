@@ -4,8 +4,8 @@ import { Key } from './key.js';
 
 export class KeyboardManager {
 	static #keyboard = Elements.keyboard;
-
 	static #notes = Scale.getKeyboardNotes();
+	static #keyMap = new Map();
 
 	static {
 		// 既存の要素をクリア
@@ -17,9 +17,20 @@ export class KeyboardManager {
 
 	// notesから鍵盤を生成
 	static #makeKeyboard() {
-		this.#notes.forEach((note, index) => {
-			const key = new Key(index, note);
+		this.#notes.forEach((note) => {
+			const key = new Key(note);
 			this.#keyboard.appendChild(key.element);
+			this.#keyMap.set(note.semitone, key);
 		});
+	}
+
+	// semitoneからKeyインスタンスを取得する
+	static getKey(semition){
+		return this.#keyMap.get(semitone);
+	}
+
+	// 全Keyを取得
+	static get allKeys(){
+		return Array.from(this.#keyMap.values());
 	}
 }
