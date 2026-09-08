@@ -37,9 +37,10 @@ header {
 /* 演奏中の音の表示 */
 .display_note {
   min-width: 100px;
-  max-width: 170px;
-  width: 20%;
+  /* max-width: 170px; */
+  width: fit-content;
   height: 80px;
+  padding: 0 24px;
   margin: 25vh auto 5vh;
   background-color: rgb(255, 240, 220);
   border-radius: 10px;
