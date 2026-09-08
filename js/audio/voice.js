@@ -1,4 +1,5 @@
 import { audioContext } from "./audioContext.js";
+import { masterGainNode } from "./audioContext.js";
 
 export class Voice {
 	#oscillator;
@@ -12,7 +13,7 @@ export class Voice {
 		this.#oscillator.frequency.value = frequency;
 
 		this.#oscillator.connect(this.#gainNode);
-		this.#gainNode.connect(audioContext.destination);
+		this.#gainNode.connect(masterGainNode);
 
 		// 初期状態は無音
 		this.#gainNode.gain.value = 0;

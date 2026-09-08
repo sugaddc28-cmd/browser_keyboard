@@ -2,19 +2,15 @@ import { Tuning } from "./tuning.js";
 import { Voice } from "./voice.js";
 
 export class Synth {
-	static #masterVolume = 0;
+	static #volume = 1;
 	static #activeVoices = new Map(); // semition
 
-
-	static setVolume(value) {
-		this.#masterVolume = value;
-	}
 
 	static startNote(semitone,durationMs=null) {
 		// 既存のVoiceが残っている場合は再利用
 		if (this.#activeVoices.has(semitone)) {
 			const voice = this.#activeVoices.get(semitone);
-			voice.start(this.#masterVolume,durationMs);
+			voice.start(this.#volume,durationMs);
 			return;
 		}
 
@@ -28,7 +24,7 @@ export class Synth {
 			() => { this.#activeVoices.delete(semitone); }
 		);
 
-		voice.start(this.#masterVolume,durationMs);
+		voice.start(this.#volume,durationMs);
 		this.#activeVoices.set(semitone,voice);
 	}
 

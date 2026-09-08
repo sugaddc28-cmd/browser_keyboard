@@ -1,6 +1,7 @@
 'use strict'
 import { Elements } from '../elements.js';
 import { Synth } from '../audio/synth.js';
+import { setMasterVolume } from '../audio/audioContext.js';
 
 export class VolumeController {
 	static #volumeSlider = Elements.volumeSlider;
@@ -16,6 +17,6 @@ export class VolumeController {
 	static #updateVolume() {
 		// スライダーのvalue(0~100)を0.0~1.0に変換
 		const volumeValue = this.#volumeSlider.value / 100;
-		Synth.setVolume(volumeValue);
+		setMasterVolume(volumeValue);
 	}
 }
