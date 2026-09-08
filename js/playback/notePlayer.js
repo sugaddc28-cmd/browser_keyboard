@@ -8,12 +8,12 @@ export class NotePlayer {
 	// setTimeOut用Timer
 	static #notePlayTimerId = null;
 
-	static stopPlayNote() {
-		// すでに動いてるタイマーがあれば削除
-		if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
-		this.#notePlayTimerId = null;
-		NoteDisplay.clear();
-	}
+	// static stopPlayNote() {
+	// 	// すでに動いてるタイマーがあれば削除
+	// 	if (this.#notePlayTimerId) clearTimeout(this.#notePlayTimerId);
+	// 	this.#notePlayTimerId = null;
+	// 	NoteDisplay.clear();
+	// }
 
 	static startNote(note,durationMs = null) {
 		// 音を再生

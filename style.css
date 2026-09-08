@@ -80,7 +80,7 @@ header {
   background-color: rgb(180, 246, 229);
 }
 
-.key:active {
+.key.active {
   background-color: rgb(125, 205, 188);
   transform: translateY(2px);
 }
