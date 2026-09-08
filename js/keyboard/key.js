@@ -25,34 +25,42 @@ export class Key {
 
 		// 押した時
 		key.addEventListener('pointerdown', () => {
-			NotePlayer.startNote(this.#note);
+			this.#press();
 		});
 
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
 			if (e.buttons === 1) {
-				NotePlayer.startNote(this.#note);
+				this.#press();
 			}
 		});
 
 		// 離した時
 		key.addEventListener('pointerup', () => {
-			NotePlayer.stopNote(this.#note);
+			this.#release();
 		});
 
 		// 押したまま要素の外へ出た時
 		key.addEventListener('pointerleave', () => {
-			NotePlayer.stopNote(this.#note);
+			this.#release();
 		});
 
 		// タッチ割り込み等でのキャンセル時
 		key.addEventListener('pointercancel', () => {
-			NotePlayer.stopNote(this.#note);
+			this.#release();
 		});
 
 		return key;
 	}
 
+	#press() {
+		this.#element.classList.add('active');
+		NotePlayer.startNote(this.#note);
+	}
 
+	#release() {
+		this.#element.classList.remove('active');
+		NotePlayer.stopNote(this.#note);
+	}
 }
