@@ -24,6 +24,18 @@ export class KeyboardManager {
 		});
 	}
 
+	static press(semitone) {
+		const key = this.getKey(semitone);
+		if (!key) return;
+		key.press();
+	}
+
+	static release(semitone) {
+		const key = this.getKey(semitone);
+		if (!key) return;
+		key.release();
+	}
+
 	// semitoneからKeyインスタンスを取得する
 	static getKey(semitone){
 		return this.#keyMap.get(semitone);

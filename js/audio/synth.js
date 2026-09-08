@@ -3,8 +3,7 @@ import { Voice } from "./voice.js";
 
 export class Synth {
 	static #volume = 1;
-	static #activeVoices = new Map(); // semition
-
+	static #activeVoices = new Map(); // 鳴っているsemitoneを保存
 
 	static startNote(semitone,durationMs=null) {
 		// 既存のVoiceが残っている場合は再利用

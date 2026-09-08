@@ -3,7 +3,7 @@ import { NotePlayer } from "../playback/notePlayer.js";
 export class Key {
 	#note;
 	#element;
-	
+
 	constructor(note) {
 		this.#note = note;
 		this.#element = this.#createElement();
@@ -22,30 +22,30 @@ export class Key {
 
 		// 押した時
 		key.addEventListener('pointerdown', () => {
-			this.#press();
+			NotePlayer.playNote(this.#note);
 		});
 
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
 			if (e.buttons === 1) {
-				this.#press();
+				NotePlayer.playNote(this.#note);
 			}
 		});
 
 		// 離した時
 		key.addEventListener('pointerup', () => {
-			this.#release();
+			NotePlayer.stopNote(this.#note);
 		});
 
 		// 押したまま要素の外へ出た時
 		key.addEventListener('pointerleave', () => {
-			this.#release();
+			NotePlayer.stopNote(this.#note);
 		});
 
 		// タッチ割り込み等でのキャンセル時
 		key.addEventListener('pointercancel', () => {
-			this.#release();
+			NotePlayer.stopNote(this.#note);
 		});
 
 		return key;
@@ -55,11 +55,9 @@ export class Key {
 
 	press() {
 		this.#element.classList.add('active');
-		// NotePlayer.startNote(this.#note);
 	}
 
 	release() {
 		this.#element.classList.remove('active');
-		// NotePlayer.stopNote(this.#note);
 	}
 }

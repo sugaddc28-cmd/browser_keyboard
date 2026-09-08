@@ -1,6 +1,4 @@
-'use strict'
 import { Elements } from '../elements.js';
-import { Synth } from '../audio/synth.js';
 import { setMasterVolume } from '../audio/audioContext.js';
 
 export class VolumeController {

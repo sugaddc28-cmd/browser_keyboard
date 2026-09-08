@@ -24,8 +24,7 @@ export class NotePlayer {
 		NoteDisplay.set(note);
 
 		// キーを操作
-		const key = KeyboardManager.getKey(note.semitone);
-		key.press();
+		KeyboardManager.press(note.semitone);
 	}
 
 	static stopNote(note) {
@@ -36,8 +35,7 @@ export class NotePlayer {
 		NoteDisplay.clear(note);
 
 		// キーを操作
-		const key = KeyboardManager.getKey(note.semitone);
-		key.release();
+		KeyboardManager.release(note.semitone);
 	}
 
 	// 音を指定時間表示する
