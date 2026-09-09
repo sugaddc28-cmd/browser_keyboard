@@ -1,12 +1,19 @@
-import { Synth } from "../audio/synth.js";
+import { NoteInput } from "../imput/noteInput.js";
+
+
 
 export class Key {
 	#note;
 	#element;
+	static #input = new NoteInput();
 
 	constructor(note) {
 		this.#note = note;
 		this.#element = this.#createElement();
+	}
+	// note プロパティ (ゲッター) を追加
+	get note() {
+		return this.#note;
 	}
 
 	// element プロパティ (ゲッター)
@@ -21,22 +28,22 @@ export class Key {
 		key.textContent = this.#note.name;
 
 		// 押した時
-		key.addEventListener('pointerdown', () => Synth.startNote(this.#note));
+		key.addEventListener('pointerdown', () => Key.#input.press(this.#note));
 
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
-			if (e.buttons > 0) {Synth.startNote(this.#note);}
+			if (e.buttons > 0) { Key.#input.press(this.#note);}
 		});
 
 		// 離した時
-		key.addEventListener('pointerup', () => Synth.stopNote(this.#note));
+		key.addEventListener('pointerup', () => Key.#input.release(this.#note));
 
 		// 押したまま要素の外へ出た時
-		key.addEventListener('pointerleave', () => Synth.stopNote(this.#note));
+		key.addEventListener('pointerleave', () => Key.#input.release(this.#note));
 
 		// タッチ割り込み等でのキャンセル時
-		key.addEventListener('pointercancel', () => Synth.stopNote(this.#note));
+		key.addEventListener('pointercancel', () => Key.#input.release(this.#note));
 
 		return key;
 	}
