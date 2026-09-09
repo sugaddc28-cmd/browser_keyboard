@@ -1,4 +1,4 @@
-import { NoteInput } from "../imput/noteInput.js";
+import { NoteInput } from "../input/noteInput.js";
 
 
 
@@ -29,7 +29,7 @@ export class Key {
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
-			if (e.buttons > 0) { Key.#input.press(this.#note);}
+			if (e.buttons > 0) { Key.#input.press(this.#note); }
 		});
 
 		// 離した時
