@@ -1,3 +1,4 @@
+import { Synth } from '../audio/synth.js';
 import { Elements } from '../elements.js';
 
 export class NoteDisplay {
@@ -6,17 +7,19 @@ export class NoteDisplay {
 	static {
 		// 既存の要素をクリア
 		this.#displayNote.innerHTML = '';
+
+		// 音表示UI用のイベントを作成
+		Synth.addVoiceListener((notes)=>{
+			if (notes.length === 0) {
+				this.#set("");
+				return;
+			}
+			this.#set(notes[0].name);
+		});
 	}
 
 	// 音名を表示する
-	static set(note) {
-		this.#displayNote.textContent = note.name;
-	}
-
-	// 表示を消す
-	static clear(note) {
-		if(note.name !== this.#displayNote.textContent)return;
-
-		this.#displayNote.textContent ='';
+	static #set(noteName) {
+		this.#displayNote.textContent = noteName;
 	}
 }

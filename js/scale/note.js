@@ -1,14 +1,14 @@
+import { Scale } from "./scale.js";
+
 // 音名、絶対音を保持するクラス
 
 export class Note{
 	#semitone;
-	#name;
 
-	constructor(semitone, noteName){
+	constructor(semitone){
 		this.#semitone = semitone;
-		this.#name = noteName;
 	}
 
 	get semitone() { return this.#semitone; }
-	get name() { return this.#name; }
+	get name() {return Scale.getName(this.#semitone)};
 }

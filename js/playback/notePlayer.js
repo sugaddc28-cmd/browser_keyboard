@@ -11,10 +11,10 @@ export class NotePlayer {
 
 	static startNote(note,durationMs = null) {
 		// 音を再生
-		Synth.startNote(note.semitone,durationMs);
+		Synth.startNote(note,durationMs);
 
 		// 音名を表示
-		NoteDisplay.set(note);
+		// NoteDisplay.set(note);
 
 		// キーを操作
 		KeyboardManager.press(note.semitone);
@@ -22,10 +22,10 @@ export class NotePlayer {
 
 	static stopNote(note) {
 		// 再生を停止
-		Synth.stopNote(note.semitone);
+		Synth.stopNote(note);
 
 		// 音名を消す
-		NoteDisplay.clear(note);
+		// NoteDisplay.clear(note);
 
 		// キーを操作
 		KeyboardManager.release(note.semitone);

@@ -7,12 +7,12 @@ export class Synth {
 	static #listeners = new Set(); // 鳴っている音が変わった時、発火する処理
 
 	// 変更を通知するリスナーの登録
-	static addVoiceListener(handlers) {
-		this.#listeners.add(handlers);
+	static addVoiceListener(listeners) {
+		this.#listeners.add(listeners);
 	}
 
-	static removeVoiceListener(handlers) {
-		this.#listeners.delete(handlers);
+	static removeVoiceListener(listeners) {
+		this.#listeners.delete(listeners);
 	}
 
 	static #notify() {
@@ -21,39 +21,39 @@ export class Synth {
 
 	// Map 関連
 	// activeVoiceの更新
-	static #setActiveVoice(semitone, voice) {
-		this.#activeVoices.set(semitone, voice);
+	static #setActiveVoice(note, voice) {
+		this.#activeVoices.set(note, voice);
 		this.#notify();
 	}
-	static #deleteActiveVoice(semitone) {
-		if (this.#activeVoices.delete(semitone)) {
+	static #deleteActiveVoice(note) {
+		if (this.#activeVoices.delete(note)) {
 			this.#notify();
 		}
 	}
 
-	static startNote(semitone,durationMs=null) {
+	static startNote(note,durationMs=null) {
 		// 既存のVoiceが残っている場合は再利用
-		if (this.#activeVoices.has(semitone)) {
-			const voice = this.#activeVoices.get(semitone);
+		if (this.#activeVoices.has(note)) {
+			const voice = this.#activeVoices.get(note);
 			voice.start(this.#volume,durationMs);
 			return;
 		}
 
-		const frequency = Tuning.getFrequency(semitone);
+		const frequency = Tuning.getFrequency(note.semitone);
 
 		const voice = new Voice(
 			frequency,
 			"square",
 			// オシレーター停止時に Map から削除する
-			() => { this.#deleteActiveVoice(semitone); }
+			() => { this.#deleteActiveVoice(note); }
 		);
 
 		voice.start(this.#volume,durationMs);
-		this.#setActiveVoice(semitone,voice);
+		this.#setActiveVoice(note,voice);
 	}
 
-	static stopNote(semitone){
-		const voice = this.#activeVoices.get(semitone);
+	static stopNote(note){
+		const voice = this.#activeVoices.get(note);
 		if(!voice)return;
 
 		voice.stop();
