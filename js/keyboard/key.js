@@ -11,10 +11,6 @@ export class Key {
 		this.#note = note;
 		this.#element = this.#createElement();
 	}
-	// note プロパティ (ゲッター) を追加
-	get note() {
-		return this.#note;
-	}
 
 	// element プロパティ (ゲッター)
 	get element() {

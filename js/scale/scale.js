@@ -17,14 +17,15 @@ export class Scale {
 	// ルート音のA4からの半音差。ドを起点にしているので-9
 	static #rootOffset = -9;
 
-	// スケールの音名を列挙
-	// 鍵盤生成用：{ absoluteSemitone, noteName } の配列を返す
-	static getKeyboardNotes() {
-		return this.#scalePattern.map(span =>
-			new Note(
-				this.#rootOffset + span,
-				noteNames[span]
-			));
+	static #notes = null;
+
+	// スケールの音を列挙
+	static getAllNotes() {
+		if (!this.#notes) {
+			this.#notes = this.#scalePattern.map(span =>
+				new Note(this.#rootOffset + span));
+		}
+		return this.#notes;
 	}
 
 	static getName(semitone) {

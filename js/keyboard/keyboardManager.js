@@ -5,7 +5,7 @@ import { Key } from './key.js';
 
 export class KeyboardManager {
 	static #keyboard = Elements.keyboard;
-	static #notes = Scale.getKeyboardNotes();
+	static #notes = Scale.getAllNotes();
 	static #keyMap = new Map();
 
 	static {
@@ -16,10 +16,10 @@ export class KeyboardManager {
 		this.#makeKeyboard();
 
 		// 音が鳴った時、keyに押した表示を反映
-		Synth.noteStarted.add((note)=>{
+		Synth.noteStarted.add((note) => {
 			this.#getKey(note).press();
 		})
-		Synth.noteEnded.add((note)=>{
+		Synth.noteEnded.add((note) => {
 			this.#getKey(note).release();
 		})
 	}
@@ -34,12 +34,12 @@ export class KeyboardManager {
 	}
 
 	// semitoneからKeyインスタンスを取得する
-	static #getKey(note){
+	static #getKey(note) {
 		return this.#keyMap.get(note);
 	}
 
 	// 全Keyを取得
-	static get allKeys(){
+	static get allKeys() {
 		return Array.from(this.#keyMap.values());
 	}
 }
