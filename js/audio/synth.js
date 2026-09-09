@@ -5,7 +5,7 @@ import { Signal } from "../signal.js";
 export class Synth {
 	static #volume = 1;
 	static #activeVoices = new Map(); // 鳴っているsemitoneを保存
-	static noteStarted = new Signal();
+	static noteStarted = new Signal(); 
 	static noteEnded = new Signal();
 
 	static #setActiveVoice(note, voice) {
@@ -16,6 +16,10 @@ export class Synth {
 		if (this.#activeVoices.delete(note)) {
 			this.noteEnded.emit(note);
 		}
+	}
+
+	static getAllActiveVoices(){
+		return Array.from(this.#activeVoices.keys());
 	}
 
 	static startNote(note,durationMs=null) {

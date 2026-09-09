@@ -16,8 +16,11 @@ export class KeyboardManager {
 		this.#makeKeyboard();
 
 		// 音が鳴った時、keyに押した表示を反映
-		Synth.addVoiceListener((notes)=>{
-
+		Synth.noteStarted.add((note)=>{
+			this.#getKey(note).press();
+		})
+		Synth.noteEnded.add((note)=>{
+			this.#getKey(note).release();
 		})
 	}
 
