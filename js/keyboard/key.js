@@ -1,4 +1,4 @@
-import { NotePlayer } from "../playback/notePlayer.js";
+import { Synth } from "../audio/synth.js";
 
 export class Key {
 	#note;
@@ -21,22 +21,22 @@ export class Key {
 		key.textContent = this.#note.name;
 
 		// 押した時
-		key.addEventListener('pointerdown', () => NotePlayer.startNote(this.#note));
+		key.addEventListener('pointerdown', () => Synth.startNote(this.#note));
 
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
-			if (e.buttons > 0) {NotePlayer.startNote(this.#note);}
+			if (e.buttons > 0) {Synth.startNote(this.#note);}
 		});
 
 		// 離した時
-		key.addEventListener('pointerup', () => NotePlayer.stopNote(this.#note));
+		key.addEventListener('pointerup', () => Synth.stopNote(this.#note));
 
 		// 押したまま要素の外へ出た時
-		key.addEventListener('pointerleave', () => NotePlayer.stopNote(this.#note));
+		key.addEventListener('pointerleave', () => Synth.stopNote(this.#note));
 
 		// タッチ割り込み等でのキャンセル時
-		key.addEventListener('pointercancel', () => NotePlayer.stopNote(this.#note));
+		key.addEventListener('pointercancel', () => Synth.stopNote(this.#note));
 
 		return key;
 	}

@@ -1,3 +1,4 @@
+import { Synth } from '../audio/synth.js';
 import { Elements } from '../elements.js';
 import { Scale } from '../scale/scale.js';
 import { Key } from './key.js';
@@ -13,6 +14,11 @@ export class KeyboardManager {
 
 		// 鍵盤に鍵を追加
 		this.#makeKeyboard();
+
+		// 音が鳴った時、keyに押した表示を反映
+		Synth.addVoiceListener((notes)=>{
+
+		})
 	}
 
 	// notesから鍵盤を生成
@@ -20,25 +26,13 @@ export class KeyboardManager {
 		this.#notes.forEach((note) => {
 			const key = new Key(note);
 			this.#keyboard.appendChild(key.element);
-			this.#keyMap.set(note.semitone, key);
+			this.#keyMap.set(note, key);
 		});
 	}
 
-	static press(semitone) {
-		const key = this.getKey(semitone);
-		if (!key) return;
-		key.press();
-	}
-
-	static release(semitone) {
-		const key = this.getKey(semitone);
-		if (!key) return;
-		key.release();
-	}
-
 	// semitoneからKeyインスタンスを取得する
-	static getKey(semitone){
-		return this.#keyMap.get(semitone);
+	static #getKey(note){
+		return this.#keyMap.get(note);
 	}
 
 	// 全Keyを取得

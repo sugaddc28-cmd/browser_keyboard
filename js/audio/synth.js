@@ -1,33 +1,20 @@
 import { Tuning } from "./tuning.js";
 import { Voice } from "./voice.js";
+import { Signal } from "../signal.js";
 
 export class Synth {
 	static #volume = 1;
 	static #activeVoices = new Map(); // 鳴っているsemitoneを保存
-	static #listeners = new Set(); // 鳴っている音が変わった時、発火する処理
+	static noteStarted = new Signal();
+	static noteEnded = new Signal();
 
-	// 変更を通知するリスナーの登録
-	static addVoiceListener(listeners) {
-		this.#listeners.add(listeners);
-	}
-
-	static removeVoiceListener(listeners) {
-		this.#listeners.delete(listeners);
-	}
-
-	static #notify() {
-		this.#listeners.forEach(callback => callback(Array.from(this.#activeVoices.keys())));
-	}
-
-	// Map 関連
-	// activeVoiceの更新
 	static #setActiveVoice(note, voice) {
 		this.#activeVoices.set(note, voice);
-		this.#notify();
+		this.noteStarted.emit(note);
 	}
 	static #deleteActiveVoice(note) {
 		if (this.#activeVoices.delete(note)) {
-			this.#notify();
+			this.noteEnded.emit(note);
 		}
 	}
 
