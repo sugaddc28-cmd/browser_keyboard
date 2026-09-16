@@ -49,8 +49,6 @@ export class Key {
 	press() {
 		this.#element.classList.add('active');
 	}
-
-	// 
 	release() {
 		this.#element.classList.remove('active');
 	}

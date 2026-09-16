@@ -14,15 +14,16 @@ export class KeyboardManager {
 
 		// 鍵盤に鍵を追加
 		this.#makeKeyboard();
-
-		// 音が鳴った時、keyに押した表示を反映
-		Synth.noteStarted.add((note) => {
-			this.#getKey(note).press();
-		})
-		Synth.noteEnded.add((note) => {
-			this.#getKey(note).release();
-		})
 	}
+
+	static displayPressed(note){
+		this.#getKey(note).press();
+	}
+
+	static displayReleased(note){
+		this.#getKey(note).release();
+	}
+
 
 	// notesから鍵盤を生成
 	static #makeKeyboard() {

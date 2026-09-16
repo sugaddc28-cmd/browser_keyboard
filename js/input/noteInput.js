@@ -1,32 +1,36 @@
-import { Synth } from "../audio/synth.js";
+import { Signal } from "../signal.js";
 
 export class NoteInput {
 
 	// note -> Set<NoteInputインスタンス>（そのnoteを今押しているインターフェース群）
-	static #sounding = new Map();
+	static #pressersByNote = new Map();
+
+	// Inputイベント
+	static pressed = new Signal();
+	static released = new Signal();
 
 	press(note) {
-		let holders = NoteInput.#sounding.get(note);
-		if (!holders) {
-			holders = new Set();
-			NoteInput.#sounding.set(note, holders);
+		let pressers = NoteInput.#pressersByNote.get(note);
+		if (!pressers) {
+			pressers = new Set();
+			NoteInput.#pressersByNote.set(note, pressers);
 		}
-		const wasSilent = holders.size === 0; // 追加前に数値を記録しておく
-		holders.add(this);
+		const wasSilent = pressers.size === 0; // 追加前に数値を記録しておく
+		pressers.add(this);
 
 		if (wasSilent) {
-			Synth.startNote(note);
+			NoteInput.pressed.emit(note);
 		}
 	}
 
 	release(note) {
-		const holders = NoteInput.#sounding.get(note);
-		if (!holders?.has(this)) return;
+		const pressers = NoteInput.#pressersByNote.get(note);
+		if (!pressers?.has(this)) return;
 
-		holders.delete(this);
-		if (holders.size === 0) {
-			NoteInput.#sounding.delete(note);
-			Synth.stopNote(note);
+		pressers.delete(this);
+		if (pressers.size === 0) {
+			NoteInput.#pressersByNote.delete(note);
+			NoteInput.released.emit(note);
 		}
 	}
 }
