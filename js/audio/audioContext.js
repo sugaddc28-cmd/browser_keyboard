@@ -21,5 +21,5 @@ const unlock = async () => {
 	window.removeEventListener('pointerdown', unlock);
 	window.addEventListener('keydown', unlock);
 };
-window.addEventListener('pointerdown', unlock);
-window.addEventListener('keydown', unlock);
+window.addEventListener('pointerdown', unlock, { capture: true });
+window.addEventListener('keydown', unlock, { capture: true });
