@@ -19,5 +19,7 @@ const unlock = async () => {
 		await audioContext.resume();
 	}
 	window.removeEventListener('pointerdown', unlock);
+	window.addEventListener('keydown', unlock);
 };
 window.addEventListener('pointerdown', unlock);
+window.addEventListener('keydown', unlock);

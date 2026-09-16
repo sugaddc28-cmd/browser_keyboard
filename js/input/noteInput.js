@@ -33,4 +33,8 @@ export class NoteInput {
 			NoteInput.released.emit(note);
 		}
 	}
+
+	static getAllPressedNotes(){
+		return Array.from(this.#pressersByNote.keys());
+	}
 }

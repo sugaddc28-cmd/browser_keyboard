@@ -18,3 +18,8 @@ NoteInput.pressed.add((note) => KeyboardManager.displayPressed(note));
 NoteInput.released.add((note) => KeyboardManager.displayReleased(note));
 
 // インプットをを受け取り、画面表示に反映する
+NoteInput.pressed.add((note) => NoteDisplay.set(note.name));
+NoteInput.released.add(() => {
+  const note = NoteInput.getAllPressedNotes()[0];
+  NoteDisplay.set(note?.name ?? '');
+});
