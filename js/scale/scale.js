@@ -29,6 +29,8 @@ export class Scale {
 	}
 
 	static getName(semitone) {
-		return noteNames[(semitone - this.#rootOffset)%12];
+		const relativePos = semitone - this.#rootOffset; // ルート音からの相対位置
+		const index = ((relativePos % 12) + 12) % 12;    // 0～11に正規化
+		return noteNames[index];
 	}
 }

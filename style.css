@@ -14,6 +14,18 @@ ul {
   list-style: none;
 }
 
+
+html, body {
+  height: 100%;
+  background-color: #161616;
+  color: #e8e8e8;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -27,23 +39,44 @@ header {
 	gap: 8px;
 	padding: 0 20px;
 	font-size: 14px;
+
+  color: #999;
 }
 
 .volume_slider {
 	cursor: pointer;
 }
 
+.settings_button {
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	padding: 0 20px;
+}
+
+/* 表示物等 */
+.main_object{
+	display: flex;
+	flex:1;
+	flex-direction: column;
+	align-items:center;
+	justify-content: center;
+	gap:60px;
+	
+	padding-bottom: 12vh;
+}
 
 /* 演奏中の音の表示 */
 .display_note {
   min-width: 100px;
-  /* max-width: 170px; */
   width: fit-content;
   height: 80px;
   padding: 0 24px;
-  margin: 25vh auto 5vh;
-  background-color: rgb(255, 240, 220);
-  border-radius: 10px;
+
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #f0f0f0;
 
   display: flex;
   justify-content: center;
@@ -54,7 +87,6 @@ header {
 
 /* 鍵盤 */
 .keyboard {
-  margin: 0 auto;
   padding: 0 3%;
   display: flex;
   max-width: 800px;
@@ -65,8 +97,8 @@ header {
 
 /* 鍵盤の各キー*/
 .key {
-  width: 100%;
-  background-color: rgb(205, 255, 238);
+  width: 50px;
+  background-color: #2a2a2a;
   border-radius: 5px;
 
   display: flex;
@@ -75,13 +107,17 @@ header {
 
   user-select: none;
   cursor: pointer;
+
+	transition: background-color 0.3s ease, transform 0.1s ease;
+
 }
 
 .key:hover {
-  background-color: rgb(180, 246, 229);
+  background-color: #333;
 }
 
 .key.active {
-  background-color: rgb(125, 205, 188);
+
+  background-color: #c59c3e;
   transform: translateY(2px);
 }

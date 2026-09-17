@@ -1,5 +1,6 @@
 import { Synth } from '../audio/synth.js';
 import { Elements } from '../elements.js';
+import { NoteInput } from '../input/noteInput.js';
 
 export class NoteDisplay {
 	static #displayNote = Elements.displayNote;
