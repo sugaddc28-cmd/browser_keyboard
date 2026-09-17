@@ -1,8 +1,8 @@
-import { Elements } from '../elements.js';
+import { SettingsElements } from './settingsElements.js';
 import { setMasterVolume } from '../audio/audioContext.js';
 
 export class VolumeController {
-	static #volumeSlider = Elements.volumeSlider;
+	static #volumeSlider = SettingsElements.volumeSlider;
 
 	static {
 		// 初期値の反映

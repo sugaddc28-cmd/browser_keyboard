@@ -4,5 +4,4 @@
 export const Elements = Object.freeze({
 	keyboard: document.querySelector(".keyboard"),
 	displayNote: document.querySelector(".display_note h1"),
-	volumeSlider: document.getElementById("volume"),
 });

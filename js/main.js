@@ -1,7 +1,8 @@
-import './ui/volumeController.js';
+import './settings/volumeController.js';
 import './keyboard/keyboardManager.js';
-import './ui/noteDisplay.js';
+import './noteDisplay.js';
 import './input/physicalKeyboardInput.js';
+import './settings/settingsPanel.js'
 
 import { NoteInput } from './input/noteInput.js';
 import { Synth } from './audio/synth.js';

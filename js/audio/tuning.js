@@ -10,4 +10,9 @@ export class Tuning{
 	static getFrequency(semitone){
 		return this.#A4 * (2 ** (semitone / 12));
 	}
+
+	// 基準周波数の変更
+	static setA4(frequency){
+		this.#A4 = frequency;
+	}
 }
