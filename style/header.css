@@ -18,12 +18,3 @@ header {
 .volume_slider {
 	cursor: pointer;
 }
-
-.settings_button {
-	background: none;
-	border: none;
-	font-size: 20px;
-	cursor: pointer;
-	padding: 0 20px;
-	color: inherit;
-}

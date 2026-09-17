@@ -3,6 +3,21 @@ header {
 	position: relative;
 }
 
+
+.settings_button {
+	background: none;
+	border: none;
+	font-size: 26px;
+	cursor: pointer;
+	padding: 0 10px;
+	color: inherit;
+	border-radius: 60px;
+}
+
+.settings_button:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* 設定パネル */
 .settings_panel {
 	position: fixed;
@@ -33,6 +48,8 @@ header {
 	border-bottom: 1px solid #2f2f2f;
 }
 
+
+
 .settings_panel_close {
 	background: none;
 	border: none;
@@ -40,6 +57,11 @@ header {
 	color: inherit;
 	cursor: pointer;
 	padding: 4px 8px;
+	border-radius: 60px;
+}
+
+.settings_panel_close:hover {
+	background-color: #2f2f2f;
 }
 
 .settings_section {
@@ -73,7 +95,6 @@ header {
 
 .settings_section.open .settings_section_body {
 	max-height: 200px;
-	padding: 0 16px 12px;
 }
 
 .settings_row {
