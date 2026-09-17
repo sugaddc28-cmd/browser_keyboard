@@ -2,6 +2,7 @@ import { Synth } from '../audio/synth.js';
 import { Elements } from '../elements.js';
 import { Scale } from '../scale/scale.js';
 import { Key } from './key.js';
+import { NoteInput } from '../input/noteInput.js';
 
 export class KeyboardManager {
 	static #keyboard = Elements.keyboard;
@@ -14,6 +15,10 @@ export class KeyboardManager {
 
 		// 鍵盤に鍵を追加
 		this.#makeKeyboard();
+		
+		// インプットを受け取り、キーボードに反映する
+		NoteInput.pressed.add((note) => KeyboardManager.displayPressed(note));
+		NoteInput.released.add((note) => KeyboardManager.displayReleased(note));
 	}
 
 	static displayPressed(note){

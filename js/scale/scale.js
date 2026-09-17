@@ -29,6 +29,6 @@ export class Scale {
 	}
 
 	static getName(semitone) {
-		return noteNames[semitone - this.#rootOffset];
+		return noteNames[(semitone - this.#rootOffset)%12];
 	}
 }

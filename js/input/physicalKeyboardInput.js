@@ -1,7 +1,7 @@
 import { NoteInput } from './noteInput.js';
 import { Scale } from '../scale/scale.js';
 
-const Keys = Object.freeze(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']);
+const Keys = Object.freeze(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', ':', ']','enter']);
 
 export class PhysicalKeyboardInput{
 	static #input = new NoteInput();
