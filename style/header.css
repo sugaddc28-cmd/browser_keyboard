@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  justify-content: space-between;
+	align-items: stretch;
+}
+
+/* 音量調節バー */
+.volume_control {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 20px;
+	font-size: 14px;
+
+  color: #999;
+}
+
+.volume_slider {
+	cursor: pointer;
+}
+
+.settings_button {
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	padding: 0 20px;
+	color: inherit;
+}

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+/* 余白やサイズ計算の初期化 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* リストの点を消す */
+ul {
+  list-style: none;
+}
+
+html, body {
+  height: 100%;
+  background-color: #161616;
+  color: #e8e8e8;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}

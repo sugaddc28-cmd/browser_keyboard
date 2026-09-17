@@ -5,8 +5,6 @@ import './input/physicalKeyboardInput.js';
 
 import { NoteInput } from './input/noteInput.js';
 import { Synth } from './audio/synth.js';
-import { NoteDisplay } from './ui/noteDisplay.js';
-import { KeyboardManager } from './keyboard/keyboardManager.js';
 
 
 // インプットを受け取り、音を鳴らす
