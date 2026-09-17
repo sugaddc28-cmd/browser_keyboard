@@ -39,12 +39,32 @@ class SettingsPanel {
 	// 各コントロールと機能クラスの結び付け
 	static #listenControls(){
 		const a4Input = SettingsElements.a4Input;
+		const DEFAULT_A4 = 440;
+		const MIN_A4 = 400;
+		const MAX_A4 = 480;
+
+		// 入力中の値の代入
 		a4Input.addEventListener('input', (e) =>{
 			const value = Number(e.target.value);
 			if(!Number.isFinite(value) || value <= 0)return;
 			Tuning.setA4(value);
 		});
 
-		
+		// フォーカスが外れた時、400~480に修正
+		a4Input.addEventListener('blur', (e) => {
+			const rawVal = e.target.value.trim();
+			let value = Number(e.target.value);
+
+			if (rawVal === '' || !Number.isFinite(value)) {
+				value = DEFAULT_A4; 
+			} else {
+				value = Math.max(MIN_A4, value); 
+				value = Math.min(MAX_A4,value);
+			}
+
+			e.target.value = value;
+			Tuning.setA4(value);
+		});
+
 	}
 }
