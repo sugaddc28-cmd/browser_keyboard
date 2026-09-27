@@ -41,4 +41,11 @@ export class Scale {
 		const index = ((relativePos % 12) + 12) % 12;    // 0～11に正規化
 		return noteNames[index];
 	}
+	
+	// ルート音(ド)かどうかを判定
+	static isRoot(semitone) {
+		const relativePos = semitone - this.#rootOffset;
+		const index = ((relativePos % 12) + 12) % 12;
+		return index === 0;
+	}
 }

@@ -23,6 +23,11 @@ export class Key {
 		key.classList.add('key');
 		key.textContent = this.#note.name;
 
+		// ルート音の場合、装飾用クラスを付与
+		if (this.#note.isRoot) {
+			key.classList.add('key_root');
+		}
+
 		// 押した時
 		key.addEventListener('pointerdown', () => Key.#input.press(this.#note));
 

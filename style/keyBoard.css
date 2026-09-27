@@ -76,13 +76,13 @@
 .key.key_root::before{
 	content: '';
 	position: absolute;
-	top: -6px;
+	top: 8px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;
-	background-color: #c59c3e;
+	background-color: #ce2d2a;
 }
 
 .key:hover {
