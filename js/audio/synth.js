@@ -4,14 +4,20 @@ import { Signal } from "../signal.js";
 
 export class Synth {
 	static #volume = 1;
+	static #waveform = "square";
 	static #activeVoices = new Map(); // 鳴っているsemitoneを保存
 	static noteStarted = new Signal(); 
 	static noteEnded = new Signal();
+
+	static setWaveform(type){
+		this.#waveform = type;
+	}
 
 	static #setActiveVoice(note, voice) {
 		this.#activeVoices.set(note, voice);
 		this.noteStarted.emit(note);
 	}
+
 	static #deleteActiveVoice(note) {
 		if (this.#activeVoices.delete(note)) {
 			this.noteEnded.emit(note);
@@ -34,7 +40,7 @@ export class Synth {
 
 		const voice = new Voice(
 			frequency,
-			"square",
+			this.#waveform,
 			// オシレーター停止時に Map から削除する
 			() => { this.#deleteActiveVoice(note); }
 		);

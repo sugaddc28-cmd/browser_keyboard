@@ -66,5 +66,11 @@ class SettingsPanel {
 			Tuning.setA4(value);
 		});
 
+		// 波形変更
+		const waveformSelect = SettingsElements.waveformSelect;
+		waveformSelect.addEventListener('change',(e)=>{
+			Synth.setWaveform(e.target.value);
+		});
+		
 	}
 }
