@@ -17,13 +17,21 @@ export class Scale {
 	// ルート音のA4からの半音差。ドを起点にしているので-9
 	static #rootOffset = -9;
 
+	// 生成するオクターブ数
+	static #octaveCount = 3;
+
 	static #notes = null;
 
 	// スケールの音を列挙
 	static getAllNotes() {
 		if (!this.#notes) {
-			this.#notes = this.#scalePattern.map(span =>
-				new Note(this.#rootOffset + span));
+			this.#notes = [];
+			const octave_offset = Math.floor((this.#octaveCount-1)/2);
+			for (let octave = -octave_offset; octave < this.#octaveCount-octave_offset; octave++) {
+				this.#scalePattern.forEach(span => {
+					this.#notes.push(new Note(this.#rootOffset + span + octave * 12));
+				});
+			}
 		}
 		return this.#notes;
 	}

@@ -1,0 +1,95 @@
+/* 表示物等 */
+.main_object{
+	display: flex;
+	flex:1;
+	flex-direction: column;
+	align-items:center;
+	justify-content: center;
+	gap:60px;
+	
+	padding-bottom: 12vh;
+}
+
+/* 演奏中の音の表示 */
+.display_note {
+  min-width: 100px;
+  width: fit-content;
+  height: 80px;
+  padding: 0 24px;
+
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #f0f0f0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+}
+
+/* 鍵盤 */
+.keyboard {
+  display: flex;
+  max-width: 100%;
+  gap: 3px;
+
+  overflow-x: auto; /* 追加：入りきらない分は横スクロール */
+	overflow-y: hidden;
+
+  /* スクロールバーのスタイル */
+  scrollbar-width: thin;                    /* Firefox：細いバーに */
+  scrollbar-color: #3a3a3a transparent;     /* Firefox：つまみ色・トラック透明 */
+}
+
+.keyboard::-webkit-scrollbar-button,
+.keyboard::-webkit-scrollbar-button:single-button,
+.keyboard::-webkit-scrollbar-button:horizontal:decrement,
+.keyboard::-webkit-scrollbar-button:horizontal:increment {
+  display: none !important;
+  width: 0;
+  height: 0;
+}
+
+/* 鍵盤の各キー*/
+.key {
+  width: 50px;
+	height: 50px;
+  flex-shrink: 0; /* 追加：縮まないよう固定 */
+  background-color: #2a2a2a;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+  cursor: pointer;
+
+	transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.key.key_root{
+	position: relative;
+}
+
+.key.key_root::before{
+	content: '';
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: #c59c3e;
+}
+
+.key:hover {
+  background-color: #333;
+}
+
+.key.active {
+  background-color: #c59c3e;
+  transform: translateY(2px);
+}

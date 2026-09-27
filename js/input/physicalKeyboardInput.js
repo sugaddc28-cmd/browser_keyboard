@@ -3,6 +3,11 @@ import { Scale } from '../scale/scale.js';
 
 const Keys = Object.freeze(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', ':', ']','enter']);
 
+
+// notes配列の何番目からKeysに割り当て始めるか
+// 現状:C4(ド、中央オクターブ)を`d`キーに合わせるためのオフセット
+const START_INDEX = 5;
+
 export class PhysicalKeyboardInput{
 	static #input = new NoteInput();
 	static #keyMap = new Map();
@@ -14,7 +19,7 @@ export class PhysicalKeyboardInput{
 	}
 
 	static #setupKeyMap(){
-		const notes = Scale.getAllNotes();
+		const notes = Scale.getAllNotes().slice(START_INDEX);
 
 		notes.forEach((keyInstance, index) => {
 			if(Keys[index]){
