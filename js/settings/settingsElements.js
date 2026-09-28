@@ -7,6 +7,7 @@ export const SettingsElements = Object.freeze({
 	temperamentSelect: document.getElementById("temperament"),
 	waveformSelect: document.getElementById("waveform"),
 	notationSelect: document.getElementById("notation"),
+	keyboardLayoutSelect: document.getElementById("keyboard-layout"),
 
 	// ボリュームスライダ―
 	volumeSlider: document.getElementById("volume"),

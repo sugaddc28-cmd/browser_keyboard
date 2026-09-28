@@ -93,3 +93,7 @@
   background-color: #c59c3e;
   transform: translateY(2px);
 }
+
+.hidden{
+	display: none;
+}

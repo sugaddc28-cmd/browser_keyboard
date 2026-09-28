@@ -1,4 +1,5 @@
 import { SettingsElements } from "./settingsElements.js";
+import { Elements } from "../elements.js";
 import { Tuning } from "../audio/tuning.js";
 import { Synth } from "../audio/synth.js";
 
@@ -72,5 +73,12 @@ class SettingsPanel {
 			Synth.setWaveform(e.target.value);
 		});
 		
+		// 鍵盤レイアウト切替
+		const keyboardLayoutSelect = SettingsElements.keyboardLayoutSelect;
+		keyboardLayoutSelect.addEventListener('change', (e) => {
+			const isFretboard = e.target.value === 'fretboard';
+			Elements.keyboard.classList.toggle('hidden', isFretboard);
+			Elements.fretboard.classList.toggle('hidden', !isFretboard);
+		});
 	}
 }
