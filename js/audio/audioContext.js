@@ -18,8 +18,12 @@ const unlock = async () => {
 	if (audioContext.state === 'suspended') {
 		await audioContext.resume();
 	}
-	window.removeEventListener('pointerdown', unlock);
-	window.addEventListener('keydown', unlock);
+	// 解除イベントの削除
+	window.removeEventListener('pointerdown', unlock, { capture: true });
+	window.removeEventListener('touchstart', unlock, { capture: true });
+	window.removeEventListener('keydown', unlock, { capture: true });
 };
+// イベントの登録
 window.addEventListener('pointerdown', unlock, { capture: true });
+window.addEventListener('touchstart', unlock, { capture: true });
 window.addEventListener('keydown', unlock, { capture: true });

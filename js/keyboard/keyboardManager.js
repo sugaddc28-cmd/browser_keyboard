@@ -6,7 +6,7 @@ import { NoteInput } from '../input/noteInput.js';
 
 export class KeyboardManager {
 	static #keyboard = Elements.keyboard;
-	static #notes = Scale.getAllNotes();
+	static #notes = Scale.getAllScaleNotes();
 	static #keyMap = new Map();
 
 	static {
@@ -15,17 +15,17 @@ export class KeyboardManager {
 
 		// 鍵盤に鍵を追加
 		this.#makeKeyboard();
-		
+
 		// インプットを受け取り、キーボードに反映する
 		NoteInput.pressed.add((note) => KeyboardManager.displayPressed(note));
 		NoteInput.released.add((note) => KeyboardManager.displayReleased(note));
 	}
 
-	static displayPressed(note){
+	static displayPressed(note) {
 		this.#getKey(note).press();
 	}
 
-	static displayReleased(note){
+	static displayReleased(note) {
 		this.#getKey(note).release();
 	}
 

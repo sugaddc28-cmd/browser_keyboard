@@ -1,14 +1,14 @@
 import { NoteInput } from './noteInput.js';
 import { Scale } from '../scale/scale.js';
 
-const Keys = Object.freeze(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', ':', ']','enter']);
+const Keys = Object.freeze(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', ':', ']', 'enter']);
 
 
 // notes配列の何番目からKeysに割り当て始めるか
 // 現状:C4(ド、中央オクターブ)を`d`キーに合わせるためのオフセット
 const START_INDEX = 5;
 
-export class PhysicalKeyboardInput{
+export class PhysicalKeyboardInput {
 	static #input = new NoteInput();
 	static #keyMap = new Map();
 	static #activeKeys = new Set();
@@ -18,18 +18,18 @@ export class PhysicalKeyboardInput{
 		this.#listenEvents();
 	}
 
-	static #setupKeyMap(){
-		const notes = Scale.getAllNotes().slice(START_INDEX);
+	static #setupKeyMap() {
+		const notes = Scale.getAllScaleNotes().slice(START_INDEX);
 
 		notes.forEach((keyInstance, index) => {
-			if(Keys[index]){
+			if (Keys[index]) {
 				// キー名をマッピング
-				this.#keyMap.set(Keys[index],keyInstance);
+				this.#keyMap.set(Keys[index], keyInstance);
 			}
 		});
 	}
 
-	static #listenEvents(){
+	static #listenEvents() {
 		window.addEventListener('keydown', (e) => {
 			if (e.repeat) return;
 

@@ -51,6 +51,24 @@
   height: 0;
 }
 
+.fretboard {
+  display: flex;
+  flex-direction: column-reverse; /* 上に高い弦、下に低い弦がくるように */
+  gap: 3px;
+  max-width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+
+.fretboard_row {
+  display: flex;
+  gap: 3px;
+}
+
 /* 鍵盤の各キー*/
 .key {
   width: 50px;

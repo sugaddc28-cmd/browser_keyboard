@@ -23,11 +23,11 @@ export class Scale {
 	static #notes = null;
 
 	// スケールの音を列挙
-	static getAllNotes() {
+	static getAllScaleNotes() {
 		if (!this.#notes) {
 			this.#notes = [];
-			const octave_offset = Math.floor((this.#octaveCount-1)/2);
-			for (let octave = -octave_offset; octave < this.#octaveCount-octave_offset; octave++) {
+			const octave_offset = Math.floor((this.#octaveCount - 1) / 2);
+			for (let octave = -octave_offset; octave < this.#octaveCount - octave_offset; octave++) {
 				this.#scalePattern.forEach(span => {
 					this.#notes.push(new Note(this.#rootOffset + span + octave * 12));
 				});
@@ -41,7 +41,13 @@ export class Scale {
 		const index = ((relativePos % 12) + 12) % 12;    // 0～11に正規化
 		return noteNames[index];
 	}
-	
+
+	static onScale(semitone){
+		const relativePos = semitone - this.#rootOffset;
+		const index = ((relativePos % 12) + 12) % 12;
+		return this.#scalePattern.includes(index);
+	}
+
 	// ルート音(ド)かどうかを判定
 	static isRoot(semitone) {
 		const relativePos = semitone - this.#rootOffset;

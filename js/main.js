@@ -1,6 +1,7 @@
 import './settings/volumeController.js';
 import './keyboard/keyboardManager.js';
 import './keyboard/keyboardScroll.js';
+import './keyboard/fretboardManager.js';
 import './noteDisplay.js';
 import './input/physicalKeyboardInput.js';
 import './settings/settingsPanel.js'
