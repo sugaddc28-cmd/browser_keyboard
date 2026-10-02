@@ -5,7 +5,7 @@ import { NoteInput } from '../input/noteInput.js';
 
 // 弦(段)ごとに完全4度差でチューニングされた、半音ごとのフレットボード形式の鍵盤
 export class FretboardManager {
-	static #STRING_COUNT = 4;
+	static #STRING_COUNT = 4; // 弦の数
 	static #FRET_COUNT = 13; // 1オクターブ+1
 	static #FOURTH = 5; // 完全4度 = 半音5つ分
 	static #BASE_SEMITONE = -21; // 一番低い弦の開放(0フレット)の半音

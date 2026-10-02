@@ -12,4 +12,5 @@ export class Note{
 	get semitone() { return this.#semitone; }
 	get name() {return Scale.getName(this.#semitone)};
 	get isRoot(){return Scale.isRoot(this.#semitone)};
+	get isCenterRoot(){return Scale.isCenterRoot(this.#semitone)};
 }
