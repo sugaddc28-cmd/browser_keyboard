@@ -37,7 +37,11 @@ export class Scale {
 		return this.#allNotes;
 	}
 
-	// 範囲を指定し、半音を列挙
+	// 半音から共有Noteを取得する
+	static getNote(semitone){
+		const notes = this.getAllNotes();
+		return notes[semitone - notes[0].semitone];
+	}
 
 	// 範囲を指定し、スケールの音を列挙
 	// スケールに含まれる音のみを列挙

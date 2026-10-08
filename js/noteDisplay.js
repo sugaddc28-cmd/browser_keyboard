@@ -1,6 +1,5 @@
-import { Synth } from './audio/synth.js';
 import { Elements } from './elements.js';
-import { NoteInput } from './input/noteInput.js';
+import { KeyInput } from './input/keyInput.js';
 
 export class NoteDisplay {
 	static #displayNote = Elements.displayNote;
@@ -11,10 +10,10 @@ export class NoteDisplay {
 
 
 		// インプットをを受け取り、画面表示に反映する
-		NoteInput.pressed.add((note) => NoteDisplay.set(note.name));
-		NoteInput.released.add(() => {
-			const note = NoteInput.getAllPressedNotes()[0];
-			NoteDisplay.set(note?.name ?? '');
+		KeyInput.pressed.add((key) => NoteDisplay.set(key.note.name));
+		KeyInput.released.add(() => {
+			const key = KeyInput.getAllPressedKeys()[0];
+			NoteDisplay.set(key?.note.name ?? '');
 		});
 	}
 

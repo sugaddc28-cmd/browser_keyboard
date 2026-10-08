@@ -1,8 +1,5 @@
-import { NoteInput } from './noteInput.js';
-import { Scale } from '../scale/scale.js';
-
-const Keys = Object.freeze(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', ':', ']', 'enter']);
-
+import { KeyInput } from './keyInput.js';
+import { KeyboardManager } from '../keyboard/keyboardManager.js';
 
 // 物理キーの位置(e.code)。日本語配列想定。上から1段目〜4段目
 const KeyRows = Object.freeze([
@@ -14,10 +11,10 @@ const KeyRows = Object.freeze([
 
 
 export class PhysicalKeyboardInput {
-	static #input = new NoteInput();
+	static #input = new KeyInput();
 	static #layout = 'linear';
-	static #keyMap = new Map();    // e.code -> Note
-	static #activeKeys = new Map(); // 押下中の e.code -> 押した時点のNote
+	static #keyMap = new Map();    // e.code -> key
+	static #activeKeys = new Map(); // 押下中の e.code -> 押した時点のKey
 
 	static {
 		this.#setupKeyMap();
@@ -25,13 +22,18 @@ export class PhysicalKeyboardInput {
 	}
 
 	static #setupKeyMap() {
-		const notes = Scale.getScaleNotes(3).slice(START_INDEX);
+		this.#keyMap.clear();
+		const keyRows = KeyboardManager.getKeyRows();
 
-		notes.forEach((keyInstance, index) => {
-			if (Keys[index]) {
-				// キー名をマッピング
-				this.#keyMap.set(Keys[index], keyInstance);
-			}
+		// 物理キーの段ごとに、コードとKeyを先頭から順に対応させる
+		KeyRows.forEach((codes, rowIndex) => {
+			const keys = keyRows[rowIndex] ?? [];
+
+			codes.forEach((code, index) => {
+				if (keys[index]) {
+					this.#keyMap.set(code, keys[index]);
+				}
+			});
 		});
 	}
 
@@ -39,23 +41,20 @@ export class PhysicalKeyboardInput {
 		window.addEventListener('keydown', (e) => {
 			if (e.repeat) return;
 
-			const key = e.key.toLowerCase();
-			const note = this.#keyMap.get(key);
+			const key = this.#keyMap.get(e.code);
+			if (!key || this.#activeKeys.has(e.code)) return;
 
-			if (!note || this.#activeKeys.has(key)) return;
-
-			this.#activeKeys.add(key);
-			this.#input.press(note);
+			this.#activeKeys.set(e.code, key);
+			this.#input.press(key);
 		});
 
 		window.addEventListener('keyup', (e) => {
-			const key = e.key.toLowerCase();
-			const note = this.#keyMap.get(key);
-			
-			if (!note || !this.#activeKeys.has(key)) return;
+			// 押した時点のKeyを離す(途中でレイアウトが変わっても対応できる)
+			const key = this.#activeKeys.get(e.code);
+			if (!key) return;
 
-			this.#activeKeys.delete(key);
-			this.#input.release(note);
+			this.#activeKeys.delete(e.code);
+			this.#input.release(key);
 		});
 	}
 }

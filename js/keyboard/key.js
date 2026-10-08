@@ -1,11 +1,16 @@
-import { NoteInput } from "../input/noteInput.js";
-
+import { KeyInput } from "../input/keyInput.js";
 
 
 export class Key {
 	#note;
 	#element;
-	static #input = new NoteInput();
+	static #input = new KeyInput();
+
+	static {
+		// 押された/離されたKey自身の見た目を更新する(どのレイアウトでも共通)
+		KeyInput.pressed.add((key) => key.press());
+		KeyInput.released.add((key) => key.release());
+	}
 
 	constructor(note) {
 		this.#note = note;
@@ -15,6 +20,10 @@ export class Key {
 	// element プロパティ (ゲッター)
 	get element() {
 		return this.#element;
+	}
+
+	get note(){
+		return this.#note;
 	}
 
 	#createElement() {
@@ -29,22 +38,22 @@ export class Key {
 		}
 
 		// 押した時
-		key.addEventListener('pointerdown', () => Key.#input.press(this.#note));
+		key.addEventListener('pointerdown', () => Key.#input.press(this));
 
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
-			if (e.buttons > 0) { Key.#input.press(this.#note); }
+			if (e.buttons > 0) { Key.#input.press(this); }
 		});
 
 		// 離した時
-		key.addEventListener('pointerup', () => Key.#input.release(this.#note));
+		key.addEventListener('pointerup', () => Key.#input.release(this));
 
 		// 押したまま要素の外へ出た時
-		key.addEventListener('pointerleave', () => Key.#input.release(this.#note));
+		key.addEventListener('pointerleave', () => Key.#input.release(this));
 
 		// タッチ割り込み等でのキャンセル時
-		key.addEventListener('pointercancel', () => Key.#input.release(this.#note));
+		key.addEventListener('pointercancel', () => Key.#input.release(this));
 
 		return key;
 	}
