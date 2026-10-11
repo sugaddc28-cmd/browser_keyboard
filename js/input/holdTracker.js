@@ -20,6 +20,7 @@ export class HoldTracker {
     const wasEmpty = holders.size === 0; // 追加前に数を記録しておく
     holders.add(holder);
 
+		// 始めて押された時実行
     if (wasEmpty) {
       this.pressed.emit(item);
     }
@@ -30,6 +31,8 @@ export class HoldTracker {
     if (!holders?.has(holder)) return;
 
     holders.delete(holder);
+
+		// 全て離された時実行
     if (holders.size === 0) {
       this.#holdersByItem.delete(item);
       this.released.emit(item);

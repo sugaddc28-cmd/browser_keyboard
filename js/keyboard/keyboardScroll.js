@@ -1,9 +1,9 @@
-import { Elements } from '../elements.js';
+import { DOMElements } from '../DOMElements.js';
 
 // 鍵盤の中クリックドラッグによる横スクロールと、初期表示位置の調整を担当
 export class KeyboardScroll {
-	static #keyboard = Elements.keyboard;
-	static #mainObject = Elements.mainObject;
+	static #keyboard = DOMElements.keyboard;
+	static #mainObject = DOMElements.mainObject;
 
 	static {
 		this.#centerScroll();
@@ -21,7 +21,7 @@ export class KeyboardScroll {
 		// マウスホイールの縦方向の回転量を横スクロールに変換
 		this.#mainObject.addEventListener('wheel', (e) => {
 			e.preventDefault(); // ページ全体の縦スクロールを抑制
-			this.#keyboard.scrollLeft += e.deltaY/5;
+			this.#keyboard.scrollLeft += e.deltaY / 5;
 		}, { passive: false });
 	}
 }

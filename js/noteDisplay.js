@@ -1,8 +1,8 @@
-import { Elements } from './elements.js';
+import { DOMElements } from './DOMElements.js';
 import { KeyInput } from './input/keyInput.js';
 
 export class NoteDisplay {
-	static #displayNote = Elements.displayNote;
+	static #displayNote = DOMElements.displayNote;
 
 	static {
 		// 既存の要素をクリア

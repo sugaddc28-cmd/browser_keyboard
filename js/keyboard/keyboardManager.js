@@ -1,4 +1,4 @@
-import { Elements } from '../elements.js';
+import { DOMElements } from '../DOMElements.js';
 import { Scale } from '../scale/scale.js';
 import { Key } from './key.js';
 
@@ -7,7 +7,7 @@ const LEAD_NOTES = -2;
 
 
 export class KeyboardManager {
-	static #keyboard = Elements.keyboard;
+	static #keyboard = DOMElements.keyboard;
 	static #notes = Scale.getScaleNotes(3);
 	static #keys = [];
 	// static #keyMap = new Map();
