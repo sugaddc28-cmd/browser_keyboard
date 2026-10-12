@@ -1,6 +1,9 @@
 import { audioContext } from "./audioContext.js";
 import { masterGainNode } from "./audioContext.js";
 
+// 「実質鳴りっぱなし」を表す停止時刻(秒)。Infinity は指定できないので有限の大きな値にする
+const FAR_FUTURE = 60 * 60 * 24 * 365;
+
 export class Voice {
 	#oscillator;
 	#gainNode;
@@ -26,7 +29,7 @@ export class Voice {
 	}
 
 	// アタック
-	start(volume, durationMs = null) {
+	start(volume, durationSecond = null) {
 		const now = audioContext.currentTime;
 
 		// 現在進行中の音量変更予約を取り消し、現在のゲイン値から滑らかに持ち上げる
@@ -34,13 +37,18 @@ export class Voice {
 		this.#gainNode.gain.setValueAtTime(this.#gainNode.gain.value, now);
 		this.#gainNode.gain.linearRampToValueAtTime(0.2 * volume, now + 0.01);
 
-		// 設定が無い場合鳴りっぱなし
-		if (durationMs === null) return;
-		const durationSec = durationMs / 1000;
+		if (durationSecond === null){
+			// 停止タイマーをリセット
+			this.#oscillator.stop(now + FAR_FUTURE);
+			return;
+		}
+
+		// 消音タイマー
+		const durationMs = durationSecond / 1000;
 		// 2. ディケイ（減衰）: ピーク到達後、無音（0）に向かって指数関数的に減衰させる
 		// timeConstant（第3引数）の値を大きくすると余韻が長くなります
-		this.#gainNode.gain.setTargetAtTime(0, now + 0.01, durationSec);
-		this.#oscillator.stop(now + 0.01 + durationSec);
+		this.#gainNode.gain.setTargetAtTime(0, now + 0.01, durationMs/5);
+		this.#oscillator.stop(now + 0.01 + durationMs);
 	}
 
 	// 停止
