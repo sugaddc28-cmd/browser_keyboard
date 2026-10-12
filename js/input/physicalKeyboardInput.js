@@ -1,5 +1,6 @@
 import { KeyInput } from './keyInput.js';
 import { KeyboardManager } from '../keyboard/keyboardManager.js';
+import { FretboardManager } from '../keyboard/fretboardManager.js'
 
 // 物理キーの位置(e.code)。日本語配列想定。上から1段目〜4段目
 const KeyRows = Object.freeze([
@@ -21,9 +22,22 @@ export class PhysicalKeyboardInput {
 		this.#listenEvents();
 	}
 
+
+	// レイアウト切り替え
+	static setLayout(layout) {
+		// 切替時に押下中のキーがあれば安全に離す
+		this.#activeKeys.forEach((key) => this.#input.release(key));
+		this.#activeKeys.clear();
+
+		this.#layout = layout;
+		this.#setupKeyMap();
+	}
+
 	static #setupKeyMap() {
 		this.#keyMap.clear();
-		const keyRows = KeyboardManager.getKeyRows();
+		const keyRows = this.#layout === 'fretboard'
+			? FretboardManager.getKeyRows()
+			: KeyboardManager.getKeyRows();
 
 		// 物理キーの段ごとに、コードとKeyを先頭から順に対応させる
 		KeyRows.forEach((codes, rowIndex) => {

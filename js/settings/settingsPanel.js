@@ -1,6 +1,7 @@
 import { DOMElements } from "../DOMElements.js";
 import { Tuning } from "../audio/tuning.js";
 import { Synth } from "../audio/synth.js";
+import { PhysicalKeyboardInput } from "../input/physicalKeyboardInput.js";
 
 class SettingsPanel {
 	static #panel = DOMElements.settingsPanel;
@@ -73,9 +74,11 @@ class SettingsPanel {
 		// 鍵盤レイアウト切替
 		const keyboardLayoutSelect = DOMElements.keyboardLayoutSelect;
 		keyboardLayoutSelect.addEventListener('change', (e) => {
-			const isFretboard = e.target.value === 'fretboard';
+			const layout = e.target.value;
+			const isFretboard = layout === 'fretboard';
 			DOMElements.keyboard.classList.toggle('hidden', isFretboard);
 			DOMElements.fretboard.classList.toggle('hidden', !isFretboard);
+			PhysicalKeyboardInput.setLayout(layout);
 		});
 	}
 }
