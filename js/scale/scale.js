@@ -1,3 +1,4 @@
+import { Tuning } from "./tuning";
 
 // スケール毎の半音パターン
 const ScalePatterns = Object.freeze({
@@ -19,6 +20,7 @@ class Note {
 	get name() { return Scale.getName(this.#semitone) };
 	get isRoot() { return Scale.isRoot(this.#semitone) };
 	get isCenterRoot() { return Scale.isCenterRoot(this.#semitone) };
+	get frequency() { return Tuning.getFrequency(this.#semitone); }
 }
 
 export class Scale {

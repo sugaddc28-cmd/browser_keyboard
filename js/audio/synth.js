@@ -1,4 +1,3 @@
-import { Tuning } from "../scale/tuning.js";
 import { Voice } from "./voice.js";
 import { Signal } from "../signal.js";
 
@@ -36,10 +35,8 @@ export class Synth {
 			return;
 		}
 
-		const frequency = Tuning.getFrequency(note.semitone);
-
 		const voice = new Voice(
-			frequency,
+			note.frequency,
 			this.#waveform,
 			// オシレーター停止時に Map から削除する
 			() => { this.#deleteActiveVoice(note); }
