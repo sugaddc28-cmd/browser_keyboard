@@ -1,24 +1,22 @@
 import { DOMElements } from './DOMElements.js';
-import { KeyInput } from './input/keyInput.js';
+import { NoteTrigger } from './input/noteTrigger.js';
 
 export class NoteDisplay {
 	static #displayNote = DOMElements.displayNote;
 
 	static {
-		// 既存の要素をクリア
-		this.#displayNote.innerHTML = '';
+		this.update();
 
-
-		// インプットをを受け取り、画面表示に反映する
-		KeyInput.pressed.add((key) => NoteDisplay.set(key.note.name));
-		KeyInput.released.add(() => {
-			const key = KeyInput.getAllPressedKeys()[0];
-			NoteDisplay.set(key?.note.name ?? '');
-		});
+		NoteTrigger.started.add(() => this.update());
+		NoteTrigger.stopped.add(() => this.update());
 	}
 
-	// 音名を表示する
-	static set(noteName) {
-		this.#displayNote.textContent = noteName;
+	// 現在鳴らしている音を全て表示する
+	static update() {
+		this.#displayNote.textContent = NoteTrigger
+			.getAllPressedNotes()
+			.sort((a, b) => a.semitone - b.semitone)
+			.map((note) => note.name)
+			.join(',');
 	}
 }

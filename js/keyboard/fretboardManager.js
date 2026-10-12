@@ -6,7 +6,7 @@ import { Key } from './key.js';
 export class FretboardManager {
 	static #STRING_COUNT = 4; // 弦の数
 	static #FRET_COUNT = 13; // 1オクターブ+1
-	static #FOURTH = 5; // 弦毎の
+	static #FOURTH = 5; // 弦毎の音の差
 	static #BASE_SEMITONE = -21; // 一番低い弦の開放(0フレット)の半音
 
 	static #fretboard = DOMElements.fretboard;
