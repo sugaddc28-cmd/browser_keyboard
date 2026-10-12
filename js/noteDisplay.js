@@ -17,6 +17,6 @@ export class NoteDisplay {
 			.getAllPressedNotes()
 			.sort((a, b) => a.semitone - b.semitone)
 			.map((note) => note.name)
-			.join(',');
+			.join(' ');
 	}
 }
