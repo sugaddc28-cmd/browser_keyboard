@@ -1,4 +1,4 @@
-import { Tuning } from "./tuning";
+import { Tuning } from "./tuning.js";
 
 // スケール毎の半音パターン
 const ScalePatterns = Object.freeze({

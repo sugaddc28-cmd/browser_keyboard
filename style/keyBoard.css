@@ -29,6 +29,12 @@
 }
 
 /* 鍵盤 */
+.keyboard,
+.fretboard {
+  /* 押下時の translateY(2px) がスクロール領域で見切れないようにする */
+  padding-bottom: 2px;
+}
+
 .keyboard {
   display: flex;
   max-width: 100%;
