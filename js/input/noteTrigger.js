@@ -14,7 +14,7 @@ export class NoteTrigger {
   static {
     // Noteを押さえているのは、そのNoteを持つKey
     KeyInput.pressed.add((key) => NoteTrigger.#tracker.press(key.note, key));
-    KeyInput.released.add((key) => NoteTrigger.#tracker.released(key.note, key));
+    KeyInput.released.add((key) => NoteTrigger.#tracker.release(key.note, key));
   }
 
   // 今押されているNoteの一覧

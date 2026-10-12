@@ -8,6 +8,18 @@ const ScalePatterns = Object.freeze({
 // 半音(クロマチック)名。0=ルート音からの半音差
 const noteNames = Object.freeze(['ド', 'ディ', 'レ', 'メ', 'ミ', 'ファ', 'フィ', 'ソ', 'ル', 'ラ', 'セ', 'シ']);
 
+class Note {
+	#semitone;
+
+	constructor(semitone) {
+		this.#semitone = semitone;
+	}
+
+	get semitone() { return this.#semitone; }
+	get name() { return Scale.getName(this.#semitone) };
+	get isRoot() { return Scale.isRoot(this.#semitone) };
+	get isCenterRoot() { return Scale.isCenterRoot(this.#semitone) };
+}
 
 export class Scale {
 	static #scalePattern = ScalePatterns.major;
@@ -81,17 +93,4 @@ export class Scale {
 	static isCenterRoot(semitone) {
 		return semitone === this.#rootOffset;
 	}
-}
-
-class Note {
-	#semitone;
-
-	constructor(semitone) {
-		this.#semitone = semitone;
-	}
-
-	get semitone() { return this.#semitone; }
-	get name() { return Scale.getName(this.#semitone) };
-	get isRoot() { return Scale.isRoot(this.#semitone) };
-	get isCenterRoot() { return Scale.isCenterRoot(this.#semitone) };
 }
