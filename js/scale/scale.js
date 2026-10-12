@@ -1,11 +1,9 @@
-import { Note } from "./note.js";
 
 // スケール毎の半音パターン
 const ScalePatterns = Object.freeze({
 	major: [0, 2, 4, 5, 7, 9, 11], // メジャースケール
 	minor: [0, 2, 3, 5, 7, 8, 10], // マイナースケール
 });
-
 
 // 半音(クロマチック)名。0=ルート音からの半音差
 const noteNames = Object.freeze(['ド', 'ディ', 'レ', 'メ', 'ミ', 'ファ', 'フィ', 'ソ', 'ル', 'ラ', 'セ', 'シ']);
@@ -83,4 +81,17 @@ export class Scale {
 	static isCenterRoot(semitone) {
 		return semitone === this.#rootOffset;
 	}
+}
+
+class Note {
+	#semitone;
+
+	constructor(semitone) {
+		this.#semitone = semitone;
+	}
+
+	get semitone() { return this.#semitone; }
+	get name() { return Scale.getName(this.#semitone) };
+	get isRoot() { return Scale.isRoot(this.#semitone) };
+	get isCenterRoot() { return Scale.isCenterRoot(this.#semitone) };
 }

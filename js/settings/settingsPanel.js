@@ -1,5 +1,5 @@
 import { DOMElements } from "../DOMElements.js";
-import { Tuning } from "../audio/tuning.js";
+import { Tuning } from "../scale/tuning.js";
 import { Synth } from "../audio/synth.js";
 import { PhysicalKeyboardInput } from "../input/physicalKeyboardInput.js";
 

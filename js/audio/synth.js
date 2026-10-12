@@ -1,4 +1,4 @@
-import { Tuning } from "./tuning.js";
+import { Tuning } from "../scale/tuning.js";
 import { Voice } from "./voice.js";
 import { Signal } from "../signal.js";
 
@@ -6,10 +6,10 @@ export class Synth {
 	static #volume = 1;
 	static #waveform = "square";
 	static #activeVoices = new Map(); // 鳴っているsemitoneを保存
-	static noteStarted = new Signal(); 
+	static noteStarted = new Signal();
 	static noteEnded = new Signal();
 
-	static setWaveform(type){
+	static setWaveform(type) {
 		this.#waveform = type;
 	}
 
@@ -24,15 +24,15 @@ export class Synth {
 		}
 	}
 
-	static getAllActiveVoices(){
+	static getAllActiveVoices() {
 		return Array.from(this.#activeVoices.keys());
 	}
 
-	static startNote(note,durationMs=null) {
+	static startNote(note, durationMs = null) {
 		// 既存のVoiceが残っている場合は再利用
 		if (this.#activeVoices.has(note)) {
 			const voice = this.#activeVoices.get(note);
-			voice.start(this.#volume,durationMs);
+			voice.start(this.#volume, durationMs);
 			return;
 		}
 
@@ -45,13 +45,13 @@ export class Synth {
 			() => { this.#deleteActiveVoice(note); }
 		);
 
-		voice.start(this.#volume,durationMs);
-		this.#setActiveVoice(note,voice);
+		voice.start(this.#volume, durationMs);
+		this.#setActiveVoice(note, voice);
 	}
 
-	static stopNote(note){
+	static stopNote(note) {
 		const voice = this.#activeVoices.get(note);
-		if(!voice)return;
+		if (!voice) return;
 
 		voice.stop();
 	}
