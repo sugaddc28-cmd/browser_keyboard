@@ -41,5 +41,4 @@ export class NoteName {
 
 		return name.split('\n')[0];
 	}
-
 }

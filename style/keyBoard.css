@@ -45,6 +45,15 @@
   white-space: nowrap;
 }
 
+.note_label {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.octave_number {
+  color: #999;
+}
+
 /* 鍵盤 */
 .keyboard,
 .fretboard {

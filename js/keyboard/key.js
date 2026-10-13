@@ -1,5 +1,7 @@
 import { KeyInput } from "../input/keyInput.js";
 import { NoteName } from "../scale/noteName.js";
+import { NoteLabel } from "../scale/noteLabel.js";
+
 
 export class Key {
 	#note;
@@ -16,7 +18,7 @@ export class Key {
 	constructor(note) {
 		this.#note = note;
 		this.#element = this.#createElement();
-
+		this.#updateName();
 
 		// 名前を変えたとき更新
 		NoteName.changed.add(() => this.#updateName());
@@ -31,15 +33,16 @@ export class Key {
 		return this.#note;
 	}
 
-	#updateName(){
-		this.#element.textContent = this.#note.name;	
+	#updateName() {
+		this.#element.replaceChildren(
+			NoteLabel.create(this.#note)
+		);
 	}
 
 	#createElement() {
 		// keyクラスを持つdiv要素を作成
 		const key = document.createElement('div');
 		key.classList.add('key');
-		key.textContent = this.#note.name;
 
 		// ルート音の場合、装飾用クラスを付与
 		if (this.#note.isRoot) {
