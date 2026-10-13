@@ -2,7 +2,7 @@ import { Signal } from '../signal.js';
 
 // 半音(クロマチック)名。0=ルート音からの半音差
 
-const noteNames = Object.freeze({
+const NOTE_NAMES_BY_NOTATION = Object.freeze({
 	doremi: [
 		'ド', 'ド♯\nレ♭', 'レ', 'レ♯\nミ♭',
 		'ミ', 'ファ', 'ファ♯\nソ♭', 'ソ',
@@ -22,15 +22,15 @@ const noteNames = Object.freeze({
 	]
 });
 
-export class NoteName {
-	static #names = noteNames.doremi;
+export class NoteNotation {
+	static #names = NOTE_NAMES_BY_NOTATION.doremi;
 	static changed = new Signal();
 
 	static setNotation(notation){
-		if(!Object.hasOwn(noteNames, notation))return;
-		if(this.#names === noteNames[notation])return;
+		if(!Object.hasOwn(NOTE_NAMES_BY_NOTATION, notation))return;
+		if(this.#names === NOTE_NAMES_BY_NOTATION[notation])return;
 
-		this.#names = noteNames[notation];
+		this.#names = NOTE_NAMES_BY_NOTATION[notation];
 		this.changed.emit();
 	}
 

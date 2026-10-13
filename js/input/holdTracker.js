@@ -40,7 +40,7 @@ export class HoldTracker {
   }
 
   // 今押さえられている対象の一覧
-  getAllItems() {
+  getAllHeldItems() {
     return Array.from(this.#holdersByItem.keys());
   }
 }

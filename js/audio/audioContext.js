@@ -14,16 +14,16 @@ export const setMasterVolume = (value) => {
 };
 
 // ユーザーの初回操作時に自動でサスペンドを解除する初期化処理
-const unlock = async () => {
+const resumeAudioContext = async () => {
 	if (audioContext.state === 'suspended') {
 		await audioContext.resume();
 	}
 	// 解除イベントの削除
-	window.removeEventListener('pointerdown', unlock, { capture: true });
-	window.removeEventListener('touchstart', unlock, { capture: true });
-	window.removeEventListener('keydown', unlock, { capture: true });
+	window.removeEventListener('pointerdown', resumeAudioContext, { capture: true });
+	window.removeEventListener('touchstart', resumeAudioContext, { capture: true });
+	window.removeEventListener('keydown', resumeAudioContext, { capture: true });
 };
 // イベントの登録
-window.addEventListener('pointerdown', unlock, { capture: true });
-window.addEventListener('touchstart', unlock, { capture: true });
-window.addEventListener('keydown', unlock, { capture: true });
+window.addEventListener('pointerdown', resumeAudioContext, { capture: true });
+window.addEventListener('touchstart', resumeAudioContext, { capture: true });
+window.addEventListener('keydown', resumeAudioContext, { capture: true });

@@ -6,30 +6,30 @@
 const C4_SEMITONE = -9;
 
 export class ScaleDefinition {
-	static #rootOffset = C4_SEMITONE;
+	static #rootSemitoneOffset = C4_SEMITONE;
 	static #pattern = Object.freeze([0, 2, 4, 5, 7, 9, 11]);
 
-	static get rootOffset() { return this.#rootOffset; }
+	static get rootSemitoneOffset() { return this.#rootSemitoneOffset; }
 
 	// C4とかの音名の数字部分を計算    
-	static getOctave(semitone) {
-		return 4 + Math.floor((semitone - C4_SEMITONE) / 12);
+	static getOctave(semitoneOffset) {
+		return 4 + Math.floor((semitoneOffset - C4_SEMITONE) / 12);
 	}
 
 	// ルートからの半音差を0〜11に正規化する。
-	static getPitchClass(semitone) {
-		return ((semitone - this.#rootOffset) % 12 + 12) % 12;
+	static getPitchClass(semitoneOffset) {
+		return ((semitoneOffset - this.#rootSemitoneOffset) % 12 + 12) % 12;
 	}
 
-	static onScale(semitone) {
-		return this.#pattern.includes(this.getPitchClass(semitone));
+	static isInScale(semitoneOffset) {
+		return this.#pattern.includes(this.getPitchClass(semitoneOffset));
 	}
 
-	static isRoot(semitone) {
-		return this.getPitchClass(semitone) === 0;
+	static isRoot(semitoneOffset) {
+		return this.getPitchClass(semitoneOffset) === 0;
 	}
 
-	static isCenterRoot(semitone) {
-		return semitone === this.#rootOffset;
+	static isCentralRoot(semitoneOffset) {
+		return semitoneOffset === this.#rootSemitoneOffset;
 	}
 }

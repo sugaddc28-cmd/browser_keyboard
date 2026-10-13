@@ -1,96 +1,96 @@
-import { DOMElements } from "../DOMElements.js";
+import { domElements } from "../domElements.js";
 import { Tuning } from "../scale/tuning.js";
 import { Synth } from "../audio/synth.js";
-import { NoteName } from '../scale/noteName.js';
+import { NoteNotation } from '../scale/noteNotation.js';
 import { PhysicalKeyboardInput } from "../input/physicalKeyboardInput.js";
 
 class SettingsPanel {
-	static #panel = DOMElements.settingsPanel;
-	static #openButton = DOMElements.settingsButton;
-	static #closeButton = DOMElements.settingsPanelClose;
+	static #panel = domElements.settingsPanel;
+	static #openButton = domElements.settingsOpenButton;
+	static #closeButton = domElements.settingsCloseButton;
 
 	static {
-		this.#listenToggle();
-		this.#listenAccordion();
-		this.#listenControls();
+		this.#bindToggleEvents();
+		this.#bindAccordionEvents();
+		this.#bindControlEvents();
 	}
 
 	// 設定パネルの開閉
-	static #listenToggle() {
+	static #bindToggleEvents() {
 		this.#openButton.addEventListener('click', () => {
-			this.#panel.classList.add('open');
+			this.#panel.classList.add('is-open');
 		});
 
 		this.#closeButton.addEventListener('click', () => {
-			this.#panel.classList.remove('open');
+			this.#panel.classList.remove('is-open');
 		});
 
 		// Escキーで設定パネルを開閉
 		window.addEventListener('keydown', (e) => {
 			if (e.key !== 'Escape') return;
 
-			this.#panel.classList.toggle('open');
+			this.#panel.classList.toggle('is-open');
 		});
 	}
 
 	// 各セクションのアコーディオン開閉
-	static #listenAccordion() {
-		const headers = this.#panel.querySelectorAll('.settings_section_header');
+	static #bindAccordionEvents() {
+		const headers = this.#panel.querySelectorAll('.settings-section-header');
 		headers.forEach(element => {
 			element.addEventListener('click', () => {
-				element.parentElement.classList.toggle('open');
+				element.parentElement.classList.toggle('is-open');
 			});
 		});
 	}
 
 	// 各コントロールと機能クラスの結び付け
-	static #listenControls() {
-		const a4Input = DOMElements.a4Input;
-		const DEFAULT_A4 = 440;
-		const MIN_A4 = 400;
-		const MAX_A4 = 480;
+	static #bindControlEvents() {
+		const a4FrequencyInput = domElements.a4FrequencyInput;
+		const DEFAULT_A4_FREQUENCY = 440;
+		const MIN_A4_FREQUENCY = 400;
+		const MAX_A4_FREQUENCY = 480;
 
 		// 入力中の値の代入
-		a4Input.addEventListener('input', (e) => {
+		a4FrequencyInput.addEventListener('input', (e) => {
 			const value = Number(e.target.value);
 			if (!Number.isFinite(value) || value <= 0) return;
-			Tuning.setA4(value);
+			Tuning.setA4Frequency(value);
 		});
 
 		// フォーカスが外れた時、400~480に修正
-		a4Input.addEventListener('blur', (e) => {
-			const rawVal = e.target.value.trim();
+		a4FrequencyInput.addEventListener('blur', (e) => {
+			const rawValue = e.target.value.trim();
 			let value = Number(e.target.value);
 
-			if (rawVal === '' || !Number.isFinite(value)) {
-				value = DEFAULT_A4;
+			if (rawValue === '' || !Number.isFinite(value)) {
+				value = DEFAULT_A4_FREQUENCY;
 			} else {
-				value = Math.max(MIN_A4, value);
-				value = Math.min(MAX_A4, value);
+				value = Math.max(MIN_A4_FREQUENCY, value);
+				value = Math.min(MAX_A4_FREQUENCY, value);
 			}
 
 			e.target.value = value;
-			Tuning.setA4(value);
+			Tuning.setA4Frequency(value);
 		});
 
 		// 波形変更
-		const waveformSelect = DOMElements.waveformSelect;
+		const waveformSelect = domElements.waveformSelect;
 		waveformSelect.addEventListener('change', (e) => {
 			Synth.setWaveform(e.target.value);
 		});
 
 		// 鍵盤レイアウト切替
-		const keyboardLayoutSelect = DOMElements.keyboardLayoutSelect;
+		const keyboardLayoutSelect = domElements.keyboardLayoutSelect;
 		keyboardLayoutSelect.addEventListener('change', (e) => {
 			const layout = e.target.value;
 			const isFretboard = layout === 'fretboard';
-			DOMElements.keyboard.classList.toggle('hidden', isFretboard);
-			DOMElements.fretboard.classList.toggle('hidden', !isFretboard);
+			domElements.keyboard.classList.toggle('is-hidden', isFretboard);
+			domElements.fretboard.classList.toggle('is-hidden', !isFretboard);
 			PhysicalKeyboardInput.setLayout(layout);
 		});
 
-		DOMElements.notationSelect.addEventListener('change',(e)=>{
-			NoteName.setNotation(e.target.value);
+		domElements.notationSelect.addEventListener('change',(e)=>{
+			NoteNotation.setNotation(e.target.value);
 		});
 
 	}

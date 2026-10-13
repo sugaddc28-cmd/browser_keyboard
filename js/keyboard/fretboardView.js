@@ -1,33 +1,33 @@
-import { DOMElements } from '../DOMElements.js';
-import { Scale } from '../scale/scale.js';
-import { Key } from './key.js';
+import { domElements } from '../domElements.js';
+import { NoteCatalog } from '../scale/noteCatalog.js';
+import { InstrumentKey } from './instrumentKey.js';
 
 // 弦(段)ごとに完全4度差でチューニングされた、半音ごとのフレットボード形式の鍵盤
-export class FretboardManager {
+export class FretboardView {
 	static #STRING_COUNT = 4; // 弦の数
 	static #FRET_COUNT = 13; // 1オクターブ+1
-	static #FOURTH = 5; // 弦毎の音の差
-	static #BASE_SEMITONE = -21; // 一番低い弦の開放(0フレット)の半音
+	static #STRING_INTERVAL_SEMITONES = 5; // 弦毎の音の差
+	static #LOWEST_STRING_SEMITONE_OFFSET = -21; // 一番低い弦の開放(0フレット)の半音
 
-	static #fretboard = DOMElements.fretboard;
+	static #fretboard = domElements.fretboard;
 	static #keyRows = [];
 
 	static {
 		this.#fretboard.innerHTML = '';
-		this.#makeFretboard();
+		this.#createKeyRows();
 	}
 
-	// 弦(段)ごとに横一列のKeyを生成
-	static #makeFretboard() {
+	// 弦(段)ごとに横一列のInstrumentKeyを生成
+	static #createKeyRows() {
 		this.#keyRows = [];
 		for (let string = 0; string < this.#STRING_COUNT; string++) {
 			const row = document.createElement('div');
-			row.classList.add('fretboard_row');
+			row.classList.add('fretboard-row');
 			const keys = [];
 
 			for (let fret = 0; fret < this.#FRET_COUNT; fret++) {
-				const semitone = this.#BASE_SEMITONE + this.#FOURTH * string + fret;
-				const key = new Key(Scale.getNote(semitone));
+				const semitoneOffset = this.#LOWEST_STRING_SEMITONE_OFFSET + this.#STRING_INTERVAL_SEMITONES * string + fret;
+				const key = new InstrumentKey(NoteCatalog.getNote(semitoneOffset));
 
 				row.appendChild(key.element);
 				keys.push(key);

@@ -8,34 +8,34 @@
 	<link rel="stylesheet" href="style/base.css">
 	<link rel="stylesheet" href="style/header.css">
 	<link rel="stylesheet" href="style/settingsPanel.css">
-	<link rel="stylesheet" href="style/keyBoard.css">
+	<link rel="stylesheet" href="style/instrument.css">
 	<script type="module" src="js/main.js"></script>
 </head>
 
 <body>
 	<header>
-		<div class="volume_control">
+		<div class="volume-control">
 			<label for="volume">音量</label>
-			<input type="range" id="volume" class="volume_slider" min="0" max="100" value="20" />
+			<input type="range" id="volume" class="volume-slider" min="0" max="100" value="20" />
 		</div>
-		<button class="settings_button" aria-label="設定">⚙</button>
+		<button class="settings-open-button" aria-label="設定">⚙</button>
 
-		<div class="settings_panel">
+		<div class="settings-panel">
 
-			<div class="settings_panel_header">
-				<button class="settings_panel_close" aria-label="閉じる">>>
+			<div class="settings-panel-header">
+				<button class="settings-close-button" aria-label="閉じる">>>
 
 				</button>
 			</div>
 
-			<div class="settings_section" data-section="tuning">
-				<button class="settings_section_header">音律</button>
-				<div class="settings_section_body">
-					<div class="settings_row">
-						<label for="a4-freq">基準周波数(A4)</label>
-						<input type="number" id="a4-freq" min="400" max="480" step="0.1" value="440">
+			<div class="settings-section" data-section="tuning">
+				<button class="settings-section-header">音律</button>
+				<div class="settings-section-body">
+					<div class="settings-row">
+						<label for="a4-frequency">基準周波数(A4)</label>
+						<input type="number" id="a4-frequency" min="400" max="480" step="0.1" value="440">
 					</div>
-					<div class="settings_row">
+					<div class="settings-row">
 						<label for="temperament">音律方式</label>
 						<select id="temperament">
 							<option value="equal">平均律</option>
@@ -45,10 +45,10 @@
 				</div>
 			</div>
 
-			<div class="settings_section" data-section="synth">
-				<button class="settings_section_header">音色</button>
-				<div class="settings_section_body">
-					<div class="settings_row">
+			<div class="settings-section" data-section="synth">
+				<button class="settings-section-header">音色</button>
+				<div class="settings-section-body">
+					<div class="settings-row">
 						<label for="waveform">波形</label>
 						<select id="waveform">
 							<option value="sine">サイン波</option>
@@ -60,10 +60,10 @@
 				</div>
 			</div>
 
-			<div class="settings_section" data-section="notation">
-				<button class="settings_section_header">表記</button>
-				<div class="settings_section_body">
-					<div class="settings_row">
+			<div class="settings-section" data-section="notation">
+				<button class="settings-section-header">表記</button>
+				<div class="settings-section-body">
+					<div class="settings-row">
 						<label for="notation">音名表記</label>
 						<select id="notation">
 							<option value="doremi">ドレミ</option>
@@ -75,10 +75,10 @@
 				</div>
 			</div>
 
-			<div class="settings_section" data-section="keyboard-view">
-				<button class="settings_section_header">鍵盤</button>
-				<div class="settings_section_body">
-					<div class="settings_row">
+			<div class="settings-section" data-section="keyboard-view">
+				<button class="settings-section-header">鍵盤</button>
+				<div class="settings-section-body">
+					<div class="settings-row">
 						<label for="keyboard-layout">レイアウト</label>
 						<select id="keyboard-layout">
 							<option value="linear">一列</option>
@@ -91,11 +91,11 @@
 
 	</header>
 
-	<div class="main_object">
-		<div class="display_note">
+	<div class="instrument-area">
+		<div class="note-display">
 		</div>
 		<div class="keyboard"></div>
-		<div class="fretboard hidden"></div>
+		<div class="fretboard is-hidden"></div>
 	</div>
 
 </body>

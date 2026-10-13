@@ -4,12 +4,12 @@ import { Signal } from "../signal.js";
 export class Synth {
 	static #volume = 1;
 	static #waveform = "square";
-	static #activeVoices = new Map(); // 鳴っているsemitoneを保存
+	static #activeVoices = new Map(); // Note -> 発音中のVoice
 	static noteStarted = new Signal();
 	static noteEnded = new Signal();
 
-	static setWaveform(type) {
-		this.#waveform = type;
+	static setWaveform(waveform) {
+		this.#waveform = waveform;
 	}
 
 	static #setActiveVoice(note, voice) {
@@ -23,7 +23,7 @@ export class Synth {
 		}
 	}
 
-	static getAllActiveVoices() {
+	static getAllActiveNotes() {
 		return Array.from(this.#activeVoices.keys());
 	}
 

@@ -1,33 +1,33 @@
-import { DOMElements } from './DOMElements.js';
-import { NoteTrigger } from './input/noteTrigger.js';
-import { NoteName } from './scale/noteName.js';
+import { domElements } from './domElements.js';
+import { NoteInput } from './input/noteInput.js';
+import { NoteNotation } from './scale/noteNotation.js';
 import { NoteLabel } from './scale/noteLabel.js';
 
 
 export class NoteDisplay {
-	static #displayNote = DOMElements.displayNote;
+	static #noteDisplay = domElements.noteDisplay;
 
 	static {
 		this.update();
 
-		NoteTrigger.started.add(() => this.update());
-		NoteTrigger.stopped.add(() => this.update());
-		NoteName.changed.add(() => this.update());
+		NoteInput.pressed.add(() => this.update());
+		NoteInput.released.add(() => this.update());
+		NoteNotation.changed.add(() => this.update());
 	}
 
 	// 現在鳴らしている音を全て表示する
 	static update() {
-		const notes = NoteTrigger.getAllPressedNotes()
-			.sort((a, b) => a.semitone - b.semitone);
+		const notes = NoteInput.getAllPressedNotes()
+			.sort((a, b) => a.semitoneOffset - b.semitoneOffset);
 
 		const elements = notes.map(note => {
 			const span = document.createElement('span');
-			span.classList.add('note_item');
+			span.classList.add('note-item');
 			span.appendChild(NoteLabel.create(note));
 			return span;
 		});
 
 
-		this.#displayNote.replaceChildren(...elements);
+		this.#noteDisplay.replaceChildren(...elements);
 	}
 }

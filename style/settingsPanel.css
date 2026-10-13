@@ -4,7 +4,7 @@ header {
 }
 
 
-.settings_button {
+.settings-open-button {
 	background: none;
 	border: none;
 	font-size: 26px;
@@ -14,12 +14,12 @@ header {
 	border-radius: 60px;
 }
 
-.settings_button:hover {
+.settings-open-button:hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* 設定パネル */
-.settings_panel {
+.settings-panel {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -36,11 +36,11 @@ header {
 	z-index: 10;
 }
 
-.settings_panel.open {
+.settings-panel.is-open {
 	transform: translateX(0);
 }
 
-.settings_panel_header {
+.settings-panel-header {
 	display: flex;
 	/* justify-content: space-between; */
 	align-items: center;
@@ -50,7 +50,7 @@ header {
 
 
 
-.settings_panel_close {
+.settings-close-button {
 	background: none;
 	border: none;
 	font-size: 18px;
@@ -60,18 +60,18 @@ header {
 	border-radius: 60px;
 }
 
-.settings_panel_close:hover {
+.settings-close-button:hover {
 	background-color: #2f2f2f;
 }
 
-.settings_section {
+.settings-section {
 	border-bottom: 1px solid #2f2f2f;
 }
-.settings_section:last-child {
+.settings-section:last-child {
 	border-bottom: none;
 }
 
-.settings_section_header {
+.settings-section-header {
 	width: 100%;
 	background: none;
 	border: none;
@@ -82,22 +82,22 @@ header {
 	cursor: pointer;
 }
 
-.settings_section_header:hover {
+.settings-section-header:hover {
 	background-color: #2a2a2a;
 }
 
-.settings_section_body {
+.settings-section-body {
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.25s ease;
 	padding: 0 16px;
 }
 
-.settings_section.open .settings_section_body {
+.settings-section.is-open .settings-section-body {
 	max-height: 200px;
 }
 
-.settings_row {
+.settings-row {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -107,18 +107,18 @@ header {
 	padding: 6px 0;
 }
 
-.settings_row label {
+.settings-row label {
 	flex-shrink: 0;
 	white-space: nowrap;
 }
 
-.settings_row select {
+.settings-row select {
 	max-width: 160px;
 	min-width: 0;
 }
 
-.settings_row select,
-.settings_row input[type="number"] {
+.settings-row select,
+.settings-row input[type="number"] {
 	background-color: #161616;
 	color: #e8e8e8;
 	border: 1px solid #3a3a3a;
@@ -127,6 +127,6 @@ header {
 	font-size: 13px;
 }
 
-.settings_row input[type="number"] {
+.settings-row input[type="number"] {
 	width: 60px;
 }

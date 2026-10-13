@@ -1,9 +1,9 @@
 import { KeyInput } from './keyInput.js';
-import { KeyboardManager } from '../keyboard/keyboardManager.js';
-import { FretboardManager } from '../keyboard/fretboardManager.js'
+import { KeyboardView } from '../keyboard/keyboardView.js';
+import { FretboardView } from '../keyboard/fretboardView.js'
 
 // 物理キーの位置(e.code)。日本語配列想定。上から1段目〜4段目
-const KeyRows = Object.freeze([
+const PHYSICAL_KEY_CODE_ROWS = Object.freeze([
 	['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'IntlYen', 'Backspace'],
 	['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight'],
 	['KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Backslash', 'Enter'],
@@ -15,11 +15,11 @@ export class PhysicalKeyboardInput {
 	static #input = new KeyInput();
 	static #layout = 'linear';
 	static #keyMap = new Map();    // e.code -> key
-	static #activeKeys = new Map(); // 押下中の e.code -> 押した時点のKey
+	static #activeKeys = new Map(); // 押下中の e.code -> 押した時点のInstrumentKey
 
 	static {
-		this.#setupKeyMap();
-		this.#listenEvents();
+		this.#updateKeyMap();
+		this.#bindEvents();
 	}
 
 
@@ -30,17 +30,17 @@ export class PhysicalKeyboardInput {
 		this.#activeKeys.clear();
 
 		this.#layout = layout;
-		this.#setupKeyMap();
+		this.#updateKeyMap();
 	}
 
-	static #setupKeyMap() {
+	static #updateKeyMap() {
 		this.#keyMap.clear();
 		const keyRows = this.#layout === 'fretboard'
-			? FretboardManager.getKeyRows()
-			: KeyboardManager.getKeyRows();
+			? FretboardView.getKeyRows()
+			: KeyboardView.getKeyRows();
 
-		// 物理キーの段ごとに、コードとKeyを先頭から順に対応させる
-		KeyRows.forEach((codes, rowIndex) => {
+		// 物理キーの段ごとに、コードとInstrumentKeyを先頭から順に対応させる
+		PHYSICAL_KEY_CODE_ROWS.forEach((codes, rowIndex) => {
 			const keys = keyRows[rowIndex] ?? [];
 
 			codes.forEach((code, index) => {
@@ -51,7 +51,7 @@ export class PhysicalKeyboardInput {
 		});
 	}
 
-	static #listenEvents() {
+	static #bindEvents() {
 		window.addEventListener('keydown', (e) => {
 			if (e.repeat) return;
 
@@ -63,7 +63,7 @@ export class PhysicalKeyboardInput {
 		});
 
 		window.addEventListener('keyup', (e) => {
-			// 押した時点のKeyを離す(途中でレイアウトが変わっても対応できる)
+			// 押した時点のInstrumentKeyを離す(途中でレイアウトが変わっても対応できる)
 			const key = this.#activeKeys.get(e.code);
 			if (!key) return;
 

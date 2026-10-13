@@ -1,17 +1,17 @@
 // DOM要素の取得を一か所に集約
 
-export const DOMElements = Object.freeze({
+export const domElements = Object.freeze({
 	// メインUI
-	mainObject: document.querySelector(".main_object"),
+	instrumentArea: document.querySelector(".instrument-area"),
 	keyboard: document.querySelector(".keyboard"),
 	fretboard: document.querySelector(".fretboard"),
-	displayNote: document.querySelector(".display_note"),
+	noteDisplay: document.querySelector(".note-display"),
 
 	// 設定パネル
-	settingsButton: document.querySelector(".settings_button"),
-	settingsPanel: document.querySelector(".settings_panel"),
-	settingsPanelClose: document.querySelector(".settings_panel_close"),
-	a4Input: document.getElementById("a4-freq"),
+	settingsOpenButton: document.querySelector(".settings-open-button"),
+	settingsPanel: document.querySelector(".settings-panel"),
+	settingsCloseButton: document.querySelector(".settings-close-button"),
+	a4FrequencyInput: document.getElementById("a4-frequency"),
 	temperamentSelect: document.getElementById("temperament"),
 	waveformSelect: document.getElementById("waveform"),
 	notationSelect: document.getElementById("notation"),

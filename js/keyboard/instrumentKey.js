@@ -1,27 +1,27 @@
 import { KeyInput } from "../input/keyInput.js";
-import { NoteName } from "../scale/noteName.js";
+import { NoteNotation } from "../scale/noteNotation.js";
 import { NoteLabel } from "../scale/noteLabel.js";
 
 
-export class Key {
+export class InstrumentKey {
 	#note;
 	#element;
 	static #input = new KeyInput();
 
 	static {
-		// 押された/離されたKey自身の見た目を更新する(どのレイアウトでも共通)
-		KeyInput.pressed.add((key) => key.press());
-		KeyInput.released.add((key) => key.release());
+		// 押された/離されたInstrumentKey自身の見た目を更新する(どのレイアウトでも共通)
+		KeyInput.pressed.add((key) => key.showPressedState());
+		KeyInput.released.add((key) => key.showReleasedState());
 
 	}
 
 	constructor(note) {
 		this.#note = note;
 		this.#element = this.#createElement();
-		this.#updateName();
+		this.#updateLabel();
 
 		// 名前を変えたとき更新
-		NoteName.changed.add(() => this.#updateName());
+		NoteNotation.changed.add(() => this.#updateLabel());
 	}
 
 	// element プロパティ (ゲッター)
@@ -33,7 +33,7 @@ export class Key {
 		return this.#note;
 	}
 
-	#updateName() {
+	#updateLabel() {
 		this.#element.replaceChildren(
 			NoteLabel.create(this.#note)
 		);
@@ -46,36 +46,36 @@ export class Key {
 
 		// ルート音の場合、装飾用クラスを付与
 		if (this.#note.isRoot) {
-			key.classList.add('key_root');
+			key.classList.add('is-root');
 		}
 
 		// 押した時
-		key.addEventListener('pointerdown', () => Key.#input.press(this));
+		key.addEventListener('pointerdown', () => InstrumentKey.#input.press(this));
 
 		// 押したまま要素内に入ってきた時
 		key.addEventListener('pointerenter', (e) => {
 			// 主ボタン（左クリックやタッチ）が押されている状態か判定
-			if (e.buttons > 0) { Key.#input.press(this); }
+			if (e.buttons > 0) { InstrumentKey.#input.press(this); }
 		});
 
 		// 離した時
-		key.addEventListener('pointerup', () => Key.#input.release(this));
+		key.addEventListener('pointerup', () => InstrumentKey.#input.release(this));
 
 		// 押したまま要素の外へ出た時
-		key.addEventListener('pointerleave', () => Key.#input.release(this));
+		key.addEventListener('pointerleave', () => InstrumentKey.#input.release(this));
 
 		// タッチ割り込み等でのキャンセル時
-		key.addEventListener('pointercancel', () => Key.#input.release(this));
+		key.addEventListener('pointercancel', () => InstrumentKey.#input.release(this));
 
 		return key;
 	}
 
 
 	// 押されたときの表示
-	press() {
-		this.#element.classList.add('active');
+	showPressedState() {
+		this.#element.classList.add('is-pressed');
 	}
-	release() {
-		this.#element.classList.remove('active');
+	showReleasedState() {
+		this.#element.classList.remove('is-pressed');
 	}
 }

@@ -5,7 +5,7 @@ header {
 }
 
 /* 音量調節バー */
-.volume_control {
+.volume-control {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -15,6 +15,6 @@ header {
   color: #999;
 }
 
-.volume_slider {
+.volume-slider {
 	cursor: pointer;
 }

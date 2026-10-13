@@ -1,18 +1,19 @@
 import { ScaleDefinition } from './scaleDefinition.js';
-import { NoteName } from './noteName.js';
+import { NoteNotation } from './noteNotation.js';
 import { Tuning } from './tuning.js';
 
 export class Note {
-	#semitone;
+	// A4を0とする半音差
+	#semitoneOffset;
 
-	constructor(semitone) {
-		this.#semitone = semitone;
+	constructor(semitoneOffset) {
+		this.#semitoneOffset = semitoneOffset;
 	}
 
-	get semitone() { return this.#semitone; }
-	get name() { return NoteName.getName(this); }
-	get pitchClass() { return ScaleDefinition.getPitchClass(this.#semitone); }
-	get isRoot() { return ScaleDefinition.isRoot(this.#semitone); }
-	get isCenterRoot() { return ScaleDefinition.isCenterRoot(this.#semitone); }
-	get frequency() { return Tuning.getFrequency(this.#semitone); }
+	get semitoneOffset() { return this.#semitoneOffset; }
+	get name() { return NoteNotation.getName(this); }
+	get pitchClass() { return ScaleDefinition.getPitchClass(this.#semitoneOffset); }
+	get isRoot() { return ScaleDefinition.isRoot(this.#semitoneOffset); }
+	get isCentralRoot() { return ScaleDefinition.isCentralRoot(this.#semitoneOffset); }
+	get frequency() { return Tuning.getFrequency(this.#semitoneOffset); }
 }

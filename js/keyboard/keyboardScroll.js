@@ -1,25 +1,25 @@
-import { DOMElements } from '../DOMElements.js';
+import { domElements } from '../domElements.js';
 
-// 鍵盤の中クリックドラッグによる横スクロールと、初期表示位置の調整を担当
+// マウスホイールによる鍵盤の横スクロールと、初期表示位置の調整を担当
 export class KeyboardScroll {
-	static #keyboard = DOMElements.keyboard;
-	static #mainObject = DOMElements.mainObject;
+	static #keyboard = domElements.keyboard;
+	static #instrumentArea = domElements.instrumentArea;
 
 	static {
-		this.#centerScroll();
-		this.#listenEvents();
+		this.#scrollToCenter();
+		this.#bindEvents();
 	}
 
 	// 初期表示位置を中央に設定
-	static #centerScroll() {
+	static #scrollToCenter() {
 		const keyboard = this.#keyboard;
 		keyboard.scrollLeft = (keyboard.scrollWidth - keyboard.clientWidth) / 2;
 	}
 
-	static #listenEvents() {
+	static #bindEvents() {
 
 		// マウスホイールの縦方向の回転量を横スクロールに変換
-		this.#mainObject.addEventListener('wheel', (e) => {
+		this.#instrumentArea.addEventListener('wheel', (e) => {
 			e.preventDefault(); // ページ全体の縦スクロールを抑制
 			this.#keyboard.scrollLeft += e.deltaY / 5;
 		}, { passive: false });

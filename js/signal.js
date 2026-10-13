@@ -3,5 +3,5 @@ export class Signal {
 	#listeners = new Set();
 	add(listener) { this.#listeners.add(listener); }
 	remove(listener) { this.#listeners.delete(listener); }
-	emit(payload) { this.#listeners.forEach(cb => cb(payload)); }
+	emit(payload) { this.#listeners.forEach(listener => listener(payload)); }
 }
