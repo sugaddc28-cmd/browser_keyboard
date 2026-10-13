@@ -1,9 +1,3 @@
-header {
-  display: flex;
-  justify-content: space-between;
-	align-items: stretch;
-}
-
 /* 音量調節バー */
 .volume-control {
 	display: flex;

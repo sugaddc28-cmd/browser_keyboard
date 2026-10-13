@@ -1,5 +1,5 @@
 import { domElements } from '../domElements.js';
-import { NoteCatalog } from '../scale/noteCatalog.js';
+import { NoteCatalog } from '../../music/noteCatalog.js';
 import { InstrumentKey } from './instrumentKey.js';
 
 // 中央のルート(ド)の何音手前から物理キーに割り当てるか

@@ -1,6 +1,6 @@
-import { KeyInput } from "../input/keyInput.js";
-import { NoteNotation } from "../scale/noteNotation.js";
-import { NoteLabel } from "../scale/noteLabel.js";
+import { KeyInput } from "../../input/keyInput.js";
+import { NoteNotation } from "../../music/noteNotation.js";
+import { NoteLabel } from "../notes/noteLabel.js";
 
 
 export class InstrumentKey {

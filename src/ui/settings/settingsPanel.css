@@ -1,9 +1,3 @@
-/* 設定ボタンと位置を合わせる */
-header {
-	position: relative;
-}
-
-
 .settings-open-button {
 	background: none;
 	border: none;

@@ -1,6 +1,6 @@
 import { KeyInput } from './keyInput.js';
-import { KeyboardView } from '../keyboard/keyboardView.js';
-import { FretboardView } from '../keyboard/fretboardView.js'
+import { KeyboardView } from '../ui/instrument/keyboardView.js';
+import { FretboardView } from '../ui/instrument/fretboardView.js'
 
 // 物理キーの位置(e.code)。日本語配列想定。上から1段目〜4段目
 const PHYSICAL_KEY_CODE_ROWS = Object.freeze([

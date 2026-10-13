@@ -1,5 +1,5 @@
 import { domElements } from '../domElements.js';
-import { NoteCatalog } from '../scale/noteCatalog.js';
+import { NoteCatalog } from '../../music/noteCatalog.js';
 import { InstrumentKey } from './instrumentKey.js';
 
 // 弦(段)ごとに完全4度差でチューニングされた、半音ごとのフレットボード形式の鍵盤

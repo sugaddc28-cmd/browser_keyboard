@@ -1,4 +1,4 @@
-import { ScaleDefinition } from "./scaleDefinition.js";
+import { ScaleDefinition } from "../../music/scaleDefinition.js";
 
 
 const OCTAVE_SUBSCRIPTS = [

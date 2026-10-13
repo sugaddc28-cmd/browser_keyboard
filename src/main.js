@@ -1,10 +1,10 @@
-import './settings/volumeController.js';
-import './keyboard/keyboardView.js';
-import './keyboard/keyboardScroll.js';
-import './keyboard/fretboardView.js';
-import './noteDisplay.js';
+import './ui/header/volumeController.js';
+import './ui/instrument/keyboardView.js';
+import './ui/instrument/keyboardScroll.js';
+import './ui/instrument/fretboardView.js';
+import './ui/notes/noteDisplay.js';
 import './input/physicalKeyboardInput.js';
-import './settings/settingsPanel.js'
+import './ui/settings/settingsPanel.js'
 
 import { NoteInput } from './input/noteInput.js';
 import { Synth } from './audio/synth.js';

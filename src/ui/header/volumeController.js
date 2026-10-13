@@ -1,5 +1,5 @@
 import { domElements } from '../domElements.js';
-import { setMasterVolume } from '../audio/audioContext.js';
+import { setMasterVolume } from '../../audio/audioContext.js';
 
 export class VolumeController {
 	static #volumeSlider = domElements.volumeSlider;

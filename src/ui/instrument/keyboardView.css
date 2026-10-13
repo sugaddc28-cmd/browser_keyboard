@@ -1,0 +1,21 @@
+.keyboard {
+  display: flex;
+  max-width: 100%;
+  gap: 3px;
+
+  overflow-x: auto; /* 追加：入りきらない分は横スクロール */
+	overflow-y: hidden;
+
+  /* スクロールバーのスタイル */
+  scrollbar-width: thin;                    /* Firefox：細いバーに */
+  scrollbar-color: #3a3a3a transparent;     /* Firefox：つまみ色・トラック透明 */
+}
+
+.keyboard::-webkit-scrollbar-button,
+.keyboard::-webkit-scrollbar-button:single-button,
+.keyboard::-webkit-scrollbar-button:horizontal:decrement,
+.keyboard::-webkit-scrollbar-button:horizontal:increment {
+  display: none !important;
+  width: 0;
+  height: 0;
+}

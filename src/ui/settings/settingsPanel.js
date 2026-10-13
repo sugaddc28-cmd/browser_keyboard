@@ -1,8 +1,8 @@
 import { domElements } from "../domElements.js";
-import { Tuning } from "../scale/tuning.js";
-import { Synth } from "../audio/synth.js";
-import { NoteNotation } from '../scale/noteNotation.js';
-import { PhysicalKeyboardInput } from "../input/physicalKeyboardInput.js";
+import { Tuning } from "../../music/tuning.js";
+import { Synth } from "../../audio/synth.js";
+import { NoteNotation } from '../../music/noteNotation.js';
+import { PhysicalKeyboardInput } from "../../input/physicalKeyboardInput.js";
 
 class SettingsPanel {
 	static #panel = domElements.settingsPanel;
