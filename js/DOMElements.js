@@ -5,7 +5,7 @@ export const DOMElements = Object.freeze({
 	mainObject: document.querySelector(".main_object"),
 	keyboard: document.querySelector(".keyboard"),
 	fretboard: document.querySelector(".fretboard"),
-	displayNote: document.querySelector(".display_note h1"),
+	displayNote: document.querySelector(".display_note"),
 
 	// 設定パネル
 	settingsButton: document.querySelector(".settings_button"),

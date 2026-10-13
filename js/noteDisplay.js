@@ -15,10 +15,17 @@ export class NoteDisplay {
 
 	// 現在鳴らしている音を全て表示する
 	static update() {
-		this.#displayNote.textContent = NoteTrigger
-			.getAllPressedNotes()
-			.sort((a, b) => a.semitone - b.semitone)
-			.map((note) => note.name)
-			.join(' ');
+		const notes = NoteTrigger.getAllPressedNotes()
+			.sort((a, b) => a.semitone - b.semitone);
+
+		const elements = notes.map(note => {
+			const span = document.createElement('span');
+			span.classList.add('note_item');
+			span.textContent = note.name;
+			return span;
+		});
+
+
+		this.#displayNote.replaceChildren(...elements);
 	}
 }

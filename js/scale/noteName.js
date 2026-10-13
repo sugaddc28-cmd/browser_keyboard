@@ -34,8 +34,12 @@ export class NoteName {
 		this.changed.emit();
 	}
 
-	static getName(note) {
-		return this.#names[note.pitchClass];
+	static getName(note, showAlternatives = false) {
+		const name = this.#names[note.pitchClass];
+
+		if (showAlternatives) return name;
+
+		return name.split('\n')[0];
 	}
 
 }
