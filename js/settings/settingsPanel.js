@@ -24,6 +24,13 @@ class SettingsPanel {
 		this.#closeButton.addEventListener('click', () => {
 			this.#panel.classList.remove('open');
 		});
+
+		// Escキーで設定パネルを開閉
+		window.addEventListener('keydown', (e) => {
+			if (e.key !== 'Escape') return;
+
+			this.#panel.classList.toggle('open');
+		});
 	}
 
 	// 各セクションのアコーディオン開閉

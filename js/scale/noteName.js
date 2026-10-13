@@ -37,4 +37,5 @@ export class NoteName {
 	static getName(note) {
 		return this.#names[note.pitchClass];
 	}
+
 }
