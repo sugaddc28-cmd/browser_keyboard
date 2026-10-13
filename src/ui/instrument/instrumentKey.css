@@ -1,36 +1,28 @@
-/* 鍵盤 */
-.keyboard,
-.fretboard {
-  /* 押下時の translateY(2px) がスクロール領域で見切れないようにする */
-  padding-bottom: 2px;
-}
-
 /* 鍵盤の各キー*/
 .key {
-  width: 50px;
+	width: 50px;
 	height: 50px;
-  flex-shrink: 0; /* 追加：縮まないよう固定 */
-  background-color: #2a2a2a;
-  border-radius: 5px;
+	flex-shrink: 0;
+	background-color: #2a2a2a;
+	border-radius: 5px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: pre-line;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	white-space: pre-line;
 
-  user-select: none;
-  cursor: pointer;
-
+	user-select: none;
+	cursor: pointer;
 
 	transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-.key.is-root{
+.key.is-root {
 	position: relative;
 }
 
-.key.is-root::before{
+.key.is-root::before {
 	content: '';
 	position: absolute;
 	top: 8px;
@@ -43,10 +35,10 @@
 }
 
 .key:hover {
-  background-color: #333;
+	background-color: #333;
 }
 
 .key.is-pressed {
-  background-color: #c59c3e;
-  transform: translateY(2px);
+	background-color: #c59c3e;
+	transform: translateY(2px);
 }

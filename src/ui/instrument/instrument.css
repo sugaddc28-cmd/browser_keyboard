@@ -1,0 +1,14 @@
+/* 鍵盤 */
+.keyboard,
+.fretboard {
+	display: flex;
+	max-width: 100%;
+	gap: 3px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: thin;
+	scrollbar-color: #3a3a3a transparent;
+
+	/* 押下時の translateY(2px) がスクロール領域で見切れないようにする */
+	padding-bottom: 2px;
+}

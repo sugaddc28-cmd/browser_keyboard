@@ -36,13 +36,11 @@
 
 .settings-panel-header {
 	display: flex;
-	/* justify-content: space-between; */
+
 	align-items: center;
 	padding: 6px 12px;
 	border-bottom: 1px solid #2f2f2f;
 }
-
-
 
 .settings-close-button {
 	background: none;
@@ -61,6 +59,7 @@
 .settings-section {
 	border-bottom: 1px solid #2f2f2f;
 }
+
 .settings-section:last-child {
 	border-bottom: none;
 }

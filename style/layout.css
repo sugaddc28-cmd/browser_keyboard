@@ -1,15 +1,15 @@
 /* 表示物等 */
-.instrument-area{
+.instrument-area {
 	display: flex;
-	flex:1;
+	flex: 1;
 	flex-direction: column;
-	align-items:center;
+	align-items: center;
 	justify-content: center;
-	gap:60px;
-	
+	gap: 60px;
+
 	padding-bottom: 12vh;
 }
 
-.is-hidden{
+.is-hidden {
 	display: none;
 }

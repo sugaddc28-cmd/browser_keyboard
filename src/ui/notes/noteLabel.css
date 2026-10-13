@@ -1,8 +1,8 @@
 .note-label {
-  display: inline-flex;
-  align-items: baseline;
+	display: inline-flex;
+	align-items: baseline;
 }
 
 .octave-number {
-  color: #999;
+	color: #999;
 }
