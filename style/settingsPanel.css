@@ -97,6 +97,10 @@ header {
 	max-height: 200px;
 }
 
+.settings-panel.is-resetting .settings-section-body {
+	transition: none;
+}
+
 .settings-row {
 	display: flex;
 	align-items: center;

@@ -15,21 +15,47 @@ class SettingsPanel {
 		this.#bindControlEvents();
 	}
 
+	// 設定パネルを閉じる
+	static #close() {
+		this.#panel.classList.remove('is-open');
+	}
+
+	// パネルが隠れてから、アニメーションなしで各セクションを閉じる
+	static #resetAccordion() {
+		this.#panel.classList.add('is-resetting');
+		this.#panel.querySelectorAll('.settings-section.is-open')
+			.forEach(section => section.classList.remove('is-open'));
+		// 閉じた状態を確定してから、通常のアニメーションを戻す
+		void this.#panel.offsetHeight;
+		this.#panel.classList.remove('is-resetting');
+	}
+
 	// 設定パネルの開閉
 	static #bindToggleEvents() {
+		this.#panel.addEventListener('transitionend', (e) => {
+			if (e.target !== this.#panel || e.propertyName !== 'transform') return;
+			if (this.#panel.classList.contains('is-open')) return;
+
+			this.#resetAccordion();
+		});
+
 		this.#openButton.addEventListener('click', () => {
 			this.#panel.classList.add('is-open');
 		});
 
 		this.#closeButton.addEventListener('click', () => {
-			this.#panel.classList.remove('is-open');
+			this.#close();
 		});
 
 		// Escキーで設定パネルを開閉
 		window.addEventListener('keydown', (e) => {
 			if (e.key !== 'Escape') return;
 
-			this.#panel.classList.toggle('is-open');
+			if (this.#panel.classList.contains('is-open')) {
+				this.#close();
+			} else {
+				this.#panel.classList.add('is-open');
+			}
 		});
 	}
 
