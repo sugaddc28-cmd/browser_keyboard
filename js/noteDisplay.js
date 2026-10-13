@@ -1,5 +1,6 @@
 import { DOMElements } from './DOMElements.js';
 import { NoteTrigger } from './input/noteTrigger.js';
+import { NoteName } from './scale/noteName.js';
 
 export class NoteDisplay {
 	static #displayNote = DOMElements.displayNote;
@@ -9,6 +10,7 @@ export class NoteDisplay {
 
 		NoteTrigger.started.add(() => this.update());
 		NoteTrigger.stopped.add(() => this.update());
+		NoteName.changed.add(() => this.update());
 	}
 
 	// 現在鳴らしている音を全て表示する

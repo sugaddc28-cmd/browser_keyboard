@@ -107,6 +107,16 @@ header {
 	padding: 6px 0;
 }
 
+.settings_row label {
+	flex-shrink: 0;
+	white-space: nowrap;
+}
+
+.settings_row select {
+	max-width: 160px;
+	min-width: 0;
+}
+
 .settings_row select,
 .settings_row input[type="number"] {
 	background-color: #161616;

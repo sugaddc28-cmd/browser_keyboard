@@ -1,5 +1,5 @@
 import { KeyInput } from "../input/keyInput.js";
-
+import { NoteName } from "../scale/noteName.js";
 
 export class Key {
 	#note;
@@ -10,11 +10,16 @@ export class Key {
 		// 押された/離されたKey自身の見た目を更新する(どのレイアウトでも共通)
 		KeyInput.pressed.add((key) => key.press());
 		KeyInput.released.add((key) => key.release());
+
 	}
 
 	constructor(note) {
 		this.#note = note;
 		this.#element = this.#createElement();
+
+
+		// 名前を変えたとき更新
+		NoteName.changed.add(() => this.#updateName());
 	}
 
 	// element プロパティ (ゲッター)
@@ -24,6 +29,10 @@ export class Key {
 
 	get note(){
 		return this.#note;
+	}
+
+	#updateName(){
+		this.#element.textContent = this.#note.name;	
 	}
 
 	#createElement() {

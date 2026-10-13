@@ -1,6 +1,7 @@
 import { DOMElements } from "../DOMElements.js";
 import { Tuning } from "../scale/tuning.js";
 import { Synth } from "../audio/synth.js";
+import { NoteName } from '../scale/noteName.js';
 import { PhysicalKeyboardInput } from "../input/physicalKeyboardInput.js";
 
 class SettingsPanel {
@@ -80,5 +81,10 @@ class SettingsPanel {
 			DOMElements.fretboard.classList.toggle('hidden', !isFretboard);
 			PhysicalKeyboardInput.setLayout(layout);
 		});
+
+		DOMElements.notationSelect.addEventListener('change',(e)=>{
+			NoteName.setNotation(e.target.value);
+		});
+
 	}
 }
