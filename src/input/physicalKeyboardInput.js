@@ -13,7 +13,7 @@ const PHYSICAL_KEY_CODE_ROWS = Object.freeze([
 
 export class PhysicalKeyboardInput {
 	static #input = new KeyInput();
-	static #layout = 'linear';
+	static #layout = 'fretboard';
 	static #keyMap = new Map();    // e.code -> key
 	static #activeKeys = new Map(); // 押下中の e.code -> 押した時点のInstrumentKey
 
