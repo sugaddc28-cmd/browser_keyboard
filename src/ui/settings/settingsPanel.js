@@ -3,6 +3,8 @@ import { Tuning } from "../../music/tuning.js";
 import { Synth } from "../../audio/synth.js";
 import { NoteNotation } from '../../music/noteNotation.js';
 import { PhysicalKeyboardInput } from "../../input/physicalKeyboardInput.js";
+import { ScaleDefinition } from "../../music/scaleDefinition.js";
+
 
 class SettingsPanel {
 	static #panel = domElements.settingsPanel;
@@ -97,6 +99,11 @@ class SettingsPanel {
 
 			e.target.value = value;
 			Tuning.setA4Frequency(value);
+		});
+
+		// 移調量の変更
+		domElements.transposeSelect.addEventListener('change', (e) => {
+			ScaleDefinition.transposeSemitones = Number(e.target.value);
 		});
 
 		// 波形変更

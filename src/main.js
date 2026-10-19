@@ -2,7 +2,7 @@ import './ui/header/volumeController.js';
 import './ui/instrument/keyboardView.js';
 import './ui/instrument/keyboardScroll.js';
 import './ui/instrument/fretboardView.js';
-import './ui/notes/noteDisplay.js';
+import './ui/display/noteDisplay.js';
 import './input/physicalKeyboardInput.js';
 import './ui/settings/settingsPanel.js';
 import './ui/settings/settingsStorage.js'

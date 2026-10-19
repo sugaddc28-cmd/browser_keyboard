@@ -12,10 +12,11 @@ export class Note {
 
 	get semitonesFromA4() { return this.#semitonesFromA4; }
 	get name() { return NoteNotation.getName(this); }
-	get octave(){return ScaleDefinition.getOctave(this.#semitonesFromA4);}
+	get octave() { return ScaleDefinition.getOctave(this.#semitonesFromA4); }
 	get pitchClass() { return ScaleDefinition.getPitchClass(this.#semitonesFromA4); }
 	get isRoot() { return ScaleDefinition.isRoot(this.#semitonesFromA4); }
-	get isInScale(){return ScaleDefinition.isInScale(this.#semitonesFromA4);}
+	get isInScale() { return ScaleDefinition.isInScale(this.#semitonesFromA4); }
 	get isCentralRoot() { return ScaleDefinition.isCentralRoot(this.#semitonesFromA4); }
-	get frequency() { return Tuning.getFrequency(this.#semitonesFromA4); }
+	get soundingSemitonesFromA4() { return this.#semitonesFromA4 + ScaleDefinition.transposeSemitones; }
+	get frequency() { return Tuning.getFrequency(this.soundingSemitonesFromA4); }
 }

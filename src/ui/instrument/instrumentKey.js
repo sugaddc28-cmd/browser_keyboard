@@ -29,7 +29,7 @@ export class InstrumentKey {
 		return this.#element;
 	}
 
-	get note(){
+	get note() {
 		return this.#note;
 	}
 
@@ -57,7 +57,7 @@ export class InstrumentKey {
 			'is-out-of-scale',
 			!this.#note.isInScale
 		)
-		
+
 
 		// 押した時
 		key.addEventListener('pointerdown', () => InstrumentKey.#input.press(this));

@@ -1,7 +1,7 @@
 import { domElements } from '../domElements.js';
 import { NoteInput } from '../../input/noteInput.js';
 import { NoteNotation } from '../../music/noteNotation.js';
-import { NoteLabel } from './noteLabel.js';
+import { NoteLabel } from '../notes/noteLabel.js';
 
 
 export class NoteDisplay {

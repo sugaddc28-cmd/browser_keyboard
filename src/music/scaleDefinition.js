@@ -6,10 +6,19 @@
 const C4_SEMITONE = -9;
 
 export class ScaleDefinition {
-	static #rootSemitonesFromA4 = C4_SEMITONE;
 	static #pattern = Object.freeze([0, 2, 4, 5, 7, 9, 11]);
+	static #transposeSemitones = 0;
 
-	static get rootSemitonesFromA4() { return this.#rootSemitonesFromA4; }
+	static get rootSemitonesFromA4() { return C4_SEMITONE; }
+	static get transposeSemitones() {
+		return this.#transposeSemitones;
+	}
+	static set transposeSemitones(semitones) {
+		if (!Number.isInteger(semitones)) return;
+		this.#transposeSemitones = semitones;
+	}
+
+	
 
 	// 絶対的なオクターブ位置を取得    
 	static getOctave(semitonesFromA4) {
@@ -18,7 +27,7 @@ export class ScaleDefinition {
 
 	// ルートからの半音差を0〜11に正規化する。
 	static getPitchClass(semitonesFromA4) {
-		return ((semitonesFromA4 - this.#rootSemitonesFromA4) % 12 + 12) % 12;
+		return ((semitonesFromA4 - C4_SEMITONE) % 12 + 12) % 12;
 	}
 
 	static isInScale(semitonesFromA4) {
@@ -30,6 +39,6 @@ export class ScaleDefinition {
 	}
 
 	static isCentralRoot(semitonesFromA4) {
-		return semitonesFromA4 === this.#rootSemitonesFromA4;
+		return semitonesFromA4 === C4_SEMITONE;
 	}
 }

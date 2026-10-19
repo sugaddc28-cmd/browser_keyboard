@@ -19,7 +19,7 @@ export class NoteLabel {
     // label.append(name, octave);
     label.append(name);
 
-		
+
     return label;
   }
 }

@@ -1,110 +1,136 @@
 <!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>簡易ピアノアプリ</title>
+    <link rel="stylesheet" href="style/base.css" />
+    <link rel="stylesheet" href="src/ui/header/header.css" />
+    <link rel="stylesheet" href="src/ui/header/volumeController.css" />
+    <link rel="stylesheet" href="src/ui/settings/settingsPanel.css" />
+    <link rel="stylesheet" href="src/ui/display/noteDisplay.css" />
+    <link rel="stylesheet" href="src/ui/notes/noteLabel.css" />
+    <link rel="stylesheet" href="src/ui/instrument/instrument.css" />
+    <link rel="stylesheet" href="src/ui/instrument/instrumentKey.css" />
+    <link rel="stylesheet" href="src/ui/instrument/keyboardView.css" />
+    <link rel="stylesheet" href="src/ui/instrument/fretboardView.css" />
+    <link rel="stylesheet" href="style/layout.css" />
+    <script type="module" src="src/main.js"></script>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>簡易ピアノアプリ</title>
-	<link rel="stylesheet" href="style/base.css">
-	<link rel="stylesheet" href="src/ui/header/header.css">
-	<link rel="stylesheet" href="src/ui/header/volumeController.css">
-	<link rel="stylesheet" href="src/ui/settings/settingsPanel.css">
-	<link rel="stylesheet" href="src/ui/notes/noteDisplay.css">
-	<link rel="stylesheet" href="src/ui/notes/noteLabel.css">
-	<link rel="stylesheet" href="src/ui/instrument/instrument.css">
-	<link rel="stylesheet" href="src/ui/instrument/instrumentKey.css">
-	<link rel="stylesheet" href="src/ui/instrument/keyboardView.css">
-	<link rel="stylesheet" href="src/ui/instrument/fretboardView.css">
-	<link rel="stylesheet" href="style/layout.css">
-	<script type="module" src="src/main.js"></script>
-</head>
+  <body>
+    <header>
+      <div class="volume-control">
+        <label for="volume">音量</label>
+        <input
+          type="range"
+          id="volume"
+          class="volume-slider"
+          min="0"
+          max="100"
+          value="20"
+        />
+      </div>
+      <button class="settings-open-button" aria-label="設定">⚙</button>
 
-<body>
-	<header>
-		<div class="volume-control">
-			<label for="volume">音量</label>
-			<input type="range" id="volume" class="volume-slider" min="0" max="100" value="20" />
-		</div>
-		<button class="settings-open-button" aria-label="設定">⚙</button>
+      <div class="settings-panel">
+        <div class="settings-panel-header">
+          <button class="settings-close-button" aria-label="閉じる">>></button>
+        </div>
 
-		<div class="settings-panel">
+        <div class="settings-section" data-section="tuning">
+          <button class="settings-section-header">音律</button>
+          <div class="settings-section-body">
+            <div class="settings-row">
+              <label for="a4-frequency">基準周波数(A4)</label>
+              <input
+                type="number"
+                id="a4-frequency"
+                min="400"
+                max="480"
+                step="0.1"
+                value="440"
+              />
+            </div>
+            <div class="settings-row">
+              <label for="temperament">音律方式</label>
+              <select id="temperament">
+                <option value="equal">平均律</option>
+                <option value="just" disabled>純正律(準備中)</option>
+              </select>
+            </div>
+            <div class="settings-row">
+              <label for="transpose">移調（半音）</label>
+              <select id="transpose">
+                <option value="-6">−6</option>
+                <option value="-5">−5</option>
+                <option value="-4">−4</option>
+                <option value="-3">−3</option>
+                <option value="-2">−2</option>
+                <option value="-1">−1</option>
+                <option value="0" selected>0</option>
+                <option value="1">+1</option>
+                <option value="2">+2</option>
+                <option value="3">+3</option>
+                <option value="4">+4</option>
+                <option value="5">+5</option>
+                <option value="6">+6</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-			<div class="settings-panel-header">
-				<button class="settings-close-button" aria-label="閉じる">>>
+        <div class="settings-section" data-section="synth">
+          <button class="settings-section-header">音色</button>
+          <div class="settings-section-body">
+            <div class="settings-row">
+              <label for="waveform">波形</label>
+              <select id="waveform">
+                <option value="sine">サイン波</option>
+                <option value="square" selected>矩形波</option>
+                <option value="sawtooth">のこぎり波</option>
+                <option value="triangle">三角波</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-				</button>
-			</div>
+        <div class="settings-section" data-section="notation">
+          <button class="settings-section-header">表記</button>
+          <div class="settings-section-body">
+            <div class="settings-row">
+              <label for="notation">音名表記</label>
+              <select id="notation">
+                <option value="doremi">ドレミ</option>
+                <option value="chromaticSolfege">
+                  クロマティック・ソルフェージュ
+                </option>
+                <option value="abcd">ABCD</option>
+                <option value="iroha">いろは</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-			<div class="settings-section" data-section="tuning">
-				<button class="settings-section-header">音律</button>
-				<div class="settings-section-body">
-					<div class="settings-row">
-						<label for="a4-frequency">基準周波数(A4)</label>
-						<input type="number" id="a4-frequency" min="400" max="480" step="0.1" value="440">
-					</div>
-					<div class="settings-row">
-						<label for="temperament">音律方式</label>
-						<select id="temperament">
-							<option value="equal">平均律</option>
-							<option value="just" disabled>純正律(準備中)</option>
-						</select>
-					</div>
-				</div>
-			</div>
+        <div class="settings-section" data-section="keyboard-view">
+          <button class="settings-section-header">鍵盤</button>
+          <div class="settings-section-body">
+            <div class="settings-row">
+              <label for="keyboard-layout">レイアウト</label>
+              <select id="keyboard-layout">
+                <option value="linear">一列</option>
+                <option value="fretboard" selected>フレットボード</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-			<div class="settings-section" data-section="synth">
-				<button class="settings-section-header">音色</button>
-				<div class="settings-section-body">
-					<div class="settings-row">
-						<label for="waveform">波形</label>
-						<select id="waveform">
-							<option value="sine">サイン波</option>
-							<option value="square" selected>矩形波</option>
-							<option value="sawtooth">のこぎり波</option>
-							<option value="triangle">三角波</option>
-						</select>
-					</div>
-				</div>
-			</div>
-
-			<div class="settings-section" data-section="notation">
-				<button class="settings-section-header">表記</button>
-				<div class="settings-section-body">
-					<div class="settings-row">
-						<label for="notation">音名表記</label>
-						<select id="notation">
-							<option value="doremi">ドレミ</option>
-							<option value="chromaticSolfege">クロマティック・ソルフェージュ</option>
-							<option value="abcd">ABCD</option>
-							<option value="iroha">いろは</option>
-						</select>
-					</div>
-				</div>
-			</div>
-
-			<div class="settings-section" data-section="keyboard-view">
-				<button class="settings-section-header">鍵盤</button>
-				<div class="settings-section-body">
-					<div class="settings-row">
-						<label for="keyboard-layout">レイアウト</label>
-						<select id="keyboard-layout">
-							<option value="linear">一列</option>
-							<option value="fretboard" selected>フレットボード</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
-	<div class="instrument-area">
-		<div class="note-display">
-		</div>
-		<div class="keyboard is-hidden"></div>
-		<div class="fretboard"></div>
-	</div>
-
-</body>
-
+    <div class="instrument-area">
+      <div class="note-display"></div>
+      <div class="keyboard is-hidden"></div>
+      <div class="fretboard"></div>
+    </div>
+  </body>
 </html>

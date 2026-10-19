@@ -12,6 +12,7 @@ export const domElements = Object.freeze({
 	settingsPanel: document.querySelector(".settings-panel"),
 	settingsCloseButton: document.querySelector(".settings-close-button"),
 	a4FrequencyInput: document.getElementById("a4-frequency"),
+	transposeSelect: document.getElementById("transpose"),
 	temperamentSelect: document.getElementById("temperament"),
 	waveformSelect: document.getElementById("waveform"),
 	notationSelect: document.getElementById("notation"),
