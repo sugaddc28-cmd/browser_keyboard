@@ -15,7 +15,7 @@ export class NoteLabel {
 
     // const octave = document.createElement('span');
     // octave.classList.add('octave-number');
-    // octave.textContent = OCTAVE_SUBSCRIPTS[ScaleDefinition.getOctave(note.semitoneOffset)];
+    // octave.textContent = OCTAVE_SUBSCRIPTS[ScaleDefinition.getOctave(note.semitonesFromA4)];
     // label.append(name, octave);
     label.append(name);
 

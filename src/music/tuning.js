@@ -7,8 +7,8 @@ export class Tuning{
 	static #a4Frequency = 440;
 
 	// 絶対半音を渡すと周波数(Hz)を返す
-	static getFrequency(semitoneOffset){
-		return this.#a4Frequency * (2 ** (semitoneOffset / 12));
+	static getFrequency(semitonesFromA4){
+		return this.#a4Frequency * (2 ** (semitonesFromA4 / 12));
 	}
 
 	// 基準周波数の変更

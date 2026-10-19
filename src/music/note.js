@@ -4,18 +4,18 @@ import { Tuning } from './tuning.js';
 
 export class Note {
 	// A4を0とする半音差
-	#semitoneOffset;
+	#semitonesFromA4;
 
-	constructor(semitoneOffset) {
-		this.#semitoneOffset = semitoneOffset;
+	constructor(semitonesFromA4) {
+		this.#semitonesFromA4 = semitonesFromA4;
 	}
 
-	get semitoneOffset() { return this.#semitoneOffset; }
+	get semitonesFromA4() { return this.#semitonesFromA4; }
 	get name() { return NoteNotation.getName(this); }
-	get octave(){return ScaleDefinition.getOctave(this.#semitoneOffset);}
-	get pitchClass() { return ScaleDefinition.getPitchClass(this.#semitoneOffset); }
-	get isRoot() { return ScaleDefinition.isRoot(this.#semitoneOffset); }
-	get isInScale(){return ScaleDefinition.isInScale(this.#semitoneOffset);}
-	get isCentralRoot() { return ScaleDefinition.isCentralRoot(this.#semitoneOffset); }
-	get frequency() { return Tuning.getFrequency(this.#semitoneOffset); }
+	get octave(){return ScaleDefinition.getOctave(this.#semitonesFromA4);}
+	get pitchClass() { return ScaleDefinition.getPitchClass(this.#semitonesFromA4); }
+	get isRoot() { return ScaleDefinition.isRoot(this.#semitonesFromA4); }
+	get isInScale(){return ScaleDefinition.isInScale(this.#semitonesFromA4);}
+	get isCentralRoot() { return ScaleDefinition.isCentralRoot(this.#semitonesFromA4); }
+	get frequency() { return Tuning.getFrequency(this.#semitonesFromA4); }
 }

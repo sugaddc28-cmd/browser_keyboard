@@ -16,7 +16,7 @@ export class NoteCatalog {
 		if (!this.#allNotes) {
 			this.#allNotes = [];
 			const octaveOffset = Math.floor((this.#octaveCount - 1) / 2);
-			const startSemitone = ScaleDefinition.rootSemitoneOffset - octaveOffset * 12;
+			const startSemitone = ScaleDefinition.rootSemitonesFromA4 - octaveOffset * 12;
 			const totalSemitones = this.#octaveCount * 12;
 
 			for (let i = 0; i < totalSemitones; i++) {
@@ -27,22 +27,22 @@ export class NoteCatalog {
 	}
 
 	// 半音から共有Noteを取得する
-	static getNote(semitoneOffset){
+	static getNote(semitonesFromA4){
 		const notes = this.getAllNotes();
-		return notes[semitoneOffset - notes[0].semitoneOffset];
+		return notes[semitonesFromA4 - notes[0].semitonesFromA4];
 	}
 
 	// 範囲を指定し、スケールの音を列挙
 	// スケールに含まれる音のみを列挙
 	static getScaleNotes(octaveCount = this.#octaveCount) {
 		const octaveOffset = Math.floor((octaveCount - 1) / 2);
-		const startSemitone = ScaleDefinition.rootSemitoneOffset - octaveOffset * 12;
+		const startSemitone = ScaleDefinition.rootSemitonesFromA4 - octaveOffset * 12;
 		const endSemitone = startSemitone + octaveCount * 12;
 
 		return this.getAllNotes().filter(note =>
-			note.semitoneOffset >= startSemitone &&
-			note.semitoneOffset < endSemitone &&
-			ScaleDefinition.isInScale(note.semitoneOffset)
+			note.semitonesFromA4 >= startSemitone &&
+			note.semitonesFromA4 < endSemitone &&
+			ScaleDefinition.isInScale(note.semitonesFromA4)
 		);
 	}
 }

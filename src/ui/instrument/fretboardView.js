@@ -7,7 +7,7 @@ export class FretboardView {
 	static #STRING_COUNT = 4; // 弦の数
 	static #FRET_COUNT = 13; // 1オクターブ+1
 	static #STRING_INTERVAL_SEMITONES = 5; // 弦毎の音の差
-	static #LOWEST_STRING_SEMITONE_OFFSET = -21; // 一番低い弦の開放(0フレット)の半音
+	static #LOWEST_STRING_SEMITONES_FROM_A4 = -21; // 一番低い弦の開放(0フレット)の半音
 
 	static #fretboard = domElements.fretboard;
 	static #keyRows = [];
@@ -26,8 +26,8 @@ export class FretboardView {
 			const keys = [];
 
 			for (let fret = 0; fret < this.#FRET_COUNT; fret++) {
-				const semitoneOffset = this.#LOWEST_STRING_SEMITONE_OFFSET + this.#STRING_INTERVAL_SEMITONES * string + fret;
-				const key = new InstrumentKey(NoteCatalog.getNote(semitoneOffset));
+				const semitonesFromA4 = this.#LOWEST_STRING_SEMITONES_FROM_A4 + this.#STRING_INTERVAL_SEMITONES * string + fret;
+				const key = new InstrumentKey(NoteCatalog.getNote(semitonesFromA4));
 
 				row.appendChild(key.element);
 				keys.push(key);

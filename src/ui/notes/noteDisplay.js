@@ -18,7 +18,7 @@ export class NoteDisplay {
 	// 現在鳴らしている音を全て表示する
 	static update() {
 		const notes = NoteInput.getAllPressedNotes()
-			.sort((a, b) => a.semitoneOffset - b.semitoneOffset);
+			.sort((a, b) => a.semitonesFromA4 - b.semitonesFromA4);
 
 		const elements = notes.map(note => {
 			const span = document.createElement('span');
