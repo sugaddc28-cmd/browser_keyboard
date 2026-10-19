@@ -12,8 +12,10 @@ export class Note {
 
 	get semitoneOffset() { return this.#semitoneOffset; }
 	get name() { return NoteNotation.getName(this); }
+	get octave(){return ScaleDefinition.getOctave(this.#semitoneOffset);}
 	get pitchClass() { return ScaleDefinition.getPitchClass(this.#semitoneOffset); }
 	get isRoot() { return ScaleDefinition.isRoot(this.#semitoneOffset); }
+	get isInScale(){return ScaleDefinition.isInScale(this.#semitoneOffset);}
 	get isCentralRoot() { return ScaleDefinition.isCentralRoot(this.#semitoneOffset); }
 	get frequency() { return Tuning.getFrequency(this.#semitoneOffset); }
 }

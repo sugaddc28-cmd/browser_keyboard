@@ -1,7 +1,7 @@
 import { KeyInput } from "../../input/keyInput.js";
 import { NoteNotation } from "../../music/noteNotation.js";
 import { NoteLabel } from "../notes/noteLabel.js";
-
+import { ScaleDefinition } from "../../music/scaleDefinition.js";
 
 export class InstrumentKey {
 	#note;
@@ -45,9 +45,19 @@ export class InstrumentKey {
 		key.classList.add('key');
 
 		// ルート音の場合、装飾用クラスを付与
-		if (this.#note.isRoot) {
-			key.classList.add('is-root');
-		}
+		// if (this.#note.isRoot) {
+		// 	key.classList.add('is-root');
+		// }
+
+		// オクターブ毎に色分け
+		key.dataset.octave = this.#note.octave;
+
+		// スケールに属しているかで色分け
+		key.classList.toggle(
+			'is-out-of-scale',
+			!this.#note.isInScale
+		)
+		
 
 		// 押した時
 		key.addEventListener('pointerdown', () => InstrumentKey.#input.press(this));

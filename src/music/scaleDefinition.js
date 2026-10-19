@@ -11,7 +11,7 @@ export class ScaleDefinition {
 
 	static get rootSemitoneOffset() { return this.#rootSemitoneOffset; }
 
-	// C4とかの音名の数字部分を計算    
+	// 絶対的なオクターブ位置を取得    
 	static getOctave(semitoneOffset) {
 		return 4 + Math.floor((semitoneOffset - C4_SEMITONE) / 12);
 	}

@@ -33,12 +33,30 @@
 	border-radius: 50%;
 	background-color: #ce2d2a;
 }
-
-.key:hover {
-	background-color: #333;
+.key[data-octave="3"] {
+	background-color: #4268b5;
 }
 
+.key[data-octave="4"] {
+	background-color: #42965a;
+}
+
+.key[data-octave="5"] {
+	background-color: #b39742;
+}
+
+.key[data-octave="6"] {
+	background-color: #ce885b;
+}
+.key.is-out-of-scale {
+	filter: brightness(0.85);
+}
+
+/* .key:hover {
+	background-color: #333;
+} */
+
 .key.is-pressed {
-	background-color: #c59c3e;
+	/* background-color: #c59c3e; */
 	transform: translateY(2px);
 }
