@@ -8,6 +8,7 @@ const C4_SEMITONE = -9;
 export class ScaleDefinition {
 	static #pattern = Object.freeze([0, 2, 4, 5, 7, 9, 11]);
 	static #transposeSemitones = 0;
+	static #isAbsoluteNotation = false;
 
 	static get rootSemitonesFromA4() { return C4_SEMITONE; }
 	static get transposeSemitones() {
@@ -18,6 +19,20 @@ export class ScaleDefinition {
 		this.#transposeSemitones = semitones;
 	}
 
+	static get isAbsoluteNotation() {
+		return this.#isAbsoluteNotation;
+	}
+	static set isAbsoluteNotation(value) {
+		if (typeof value !== 'boolean') return;
+		this.#isAbsoluteNotation = value;
+	}
+
+	// 表示用の半音を取得
+	static getNotationSemitonesFromA4(semitonesFromA4) {
+		return this.#isAbsoluteNotation
+			? semitonesFromA4 + this.#transposeSemitones
+			: semitonesFromA4;
+	}
 	
 
 	// 絶対的なオクターブ位置を取得    
